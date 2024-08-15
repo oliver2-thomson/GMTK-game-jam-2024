@@ -3,7 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 
-# Comment to check workflow #2
+# Comment to check workflow
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
