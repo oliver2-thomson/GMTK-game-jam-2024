@@ -8,6 +8,7 @@ using TMPro;
 public class TitleMenu : MonoBehaviour
 {
     // A basic title-screen menu for accessing the options and credits.
+    // Test
     enum MenuState
     {
         Title,
