@@ -7,17 +7,24 @@ public class PlayerController : MonoBehaviour
 {
     // Basic platforming physics for the player to use
 
-    [Header("Player Physics")]
+    // Public variables
+    [Header("General Player Settings")]
+    public int MaxHealth;
+    [Space(10)]
+    [Header("Physics Settings")]
     public float MoveSpeed;
     public float MoveAccel;
     public float MoveMidairAccel;
-    [Space(10)]
+
     public float JumpSpeed;
     public float Gravity;
 
+    // Private variables
     private bool leftInput;
     private bool rightInput;
     private bool jumpInput;
+
+    private int currentHealth;
 
     private bool isGrounded;
     private Vector2 currentVelocity;
@@ -30,6 +37,11 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+    }
+
+    private void Start()
+    {
+        currentHealth = MaxHealth;
     }
 
     private void Update()
@@ -100,5 +112,14 @@ public class PlayerController : MonoBehaviour
 
         // Final velocity update
         rb.velocity = currentVelocity;
+    }
+
+    public void OnHurt()
+    {
+        currentHealth--;
+        if (currentHealth < 1)
+        {
+            Debug.Log("Game Over!");
+        }
     }
 }
