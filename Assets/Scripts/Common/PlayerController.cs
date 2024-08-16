@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
 
         // Ground check
-        RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, 0, Vector2.down);
+        RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
         foreach (RaycastHit2D hit in groundCheck)
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Ceiling check
-        RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(rb.position, col.size, 0, Vector2.up);
+        RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.up);
         foreach (RaycastHit2D hit in ceilingCheck)
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
