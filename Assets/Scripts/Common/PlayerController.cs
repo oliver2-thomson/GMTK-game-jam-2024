@@ -207,6 +207,7 @@ public class PlayerController : MonoBehaviour
                 lowestBlocks.Add(block);
             }
         }
+        
         // Get rid of blocks that are too far away from each other, so that the legs dont end up dangling in midair
         if (lowestBlocks.Count > 1) 
         {
@@ -216,6 +217,19 @@ public class PlayerController : MonoBehaviour
                 {
                     lowestBlocks.RemoveAt(i);
                 }
+            }
+        }
+
+        // Deactive the block colliders that are right above the player
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            if (lowestBlocks.Contains(block))
+            {
+                block.attachedRigidbody.simulated = false;
+            }
+            else
+            {
+                block.attachedRigidbody.simulated = true;
             }
         }
 
