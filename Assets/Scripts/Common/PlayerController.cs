@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     private bool rightInput;
     private bool jumpInput;
 
-    private int currentHealth;
-
     private bool isGrounded;
     private float currentJumpTimer;
     private Vector2 currentVelocity;
@@ -44,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = MaxHealth;
+        FindBottomMostPoint();
     }
 
     private void Update()
@@ -186,15 +184,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnHurt()
-    {
-        currentHealth--;
-        if (currentHealth < 1)
-        {
-            Debug.Log("Game Over!");
-        }
-    }
-
     public void FindBottomMostPoint()
     {
         List<BoxCollider2D> blockChildren = transform.GetChild(0).GetComponentsInChildren<BoxCollider2D>().ToList();
@@ -217,6 +206,17 @@ public class PlayerController : MonoBehaviour
                 lowestBlocks.Add(block);
             }
         }
+        // Get rid of blocks that are too far away from each other, so that the legs dont end up dangling in midair
+        if (lowestBlocks.Count > 1) 
+        {
+            for (int i = lowestBlocks.Count - 1; i > 0; i--)
+            {
+                if ((lowestBlocks[i].transform.position.x - lowestBlocks[i - 1].transform.position.x) > lowestBlocks[i].size.x)
+                {
+                    lowestBlocks.RemoveAt(i);
+                }
+            }
+        }
 
         // Then, find the middle point of those for the new x position
         float totalX = 0f;
@@ -228,9 +228,6 @@ public class PlayerController : MonoBehaviour
 
         // Move all of the blocks by how much the player would be moving
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
-        foreach (BoxCollider2D block in blockChildren)
-        {
-            block.transform.localPosition += (Vector3)(rb.position - playerNewPos);
-        }
+        transform.GetChild(0).localPosition += (Vector3)(rb.position - playerNewPos);
     }
 }
