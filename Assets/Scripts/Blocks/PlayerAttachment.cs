@@ -60,6 +60,7 @@ public partial class PlayerAttachment : MonoBehaviour
 
     public void TryDetachBlock(BaseBlock block)
     {
+        // WIP - we need to reorganise the block list and all attachment points if a block gets removed
         for (int i = 0; i < BlockList.GetLength(0); i++)
         {
             for (int j = 0; j < BlockList.GetLength(1); j++)
