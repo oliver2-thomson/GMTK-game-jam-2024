@@ -65,15 +65,6 @@ public class PlayerAttachment : MonoBehaviour
         }
     }
 
-   
-
-    void AttachBlock(Vector2Int localPosition) 
-    {
-        if (CheckPositionIfValid(localPosition)) 
-        {
-            
-        }
-    }
 
     bool CheckPositionIfValid(Vector2Int position) 
     {
@@ -164,17 +155,5 @@ public class PlayerAttachment : MonoBehaviour
     void TestAttachment()
     {
         AttachBlock(allHighlightObjects[0].attachPoint, GameObject.Instantiate(debugTile).GetComponent<BaseBlock>());
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
     }
 }
