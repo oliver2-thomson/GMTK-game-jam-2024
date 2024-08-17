@@ -2672,6 +2672,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 723147529100122784, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1591124503876832349, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
       propertyPath: m_Name
@@ -2863,6 +2868,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8519386133197237885, guid: 434a58b68391b8f4695f26bd54a8ea03,
+        type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1555523163}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
