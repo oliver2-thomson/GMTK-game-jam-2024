@@ -12,6 +12,11 @@ public partial class PlayerAttachment : MonoBehaviour
 
     [SerializeField] Transform pickupCube;
     [SerializeField] float pickupRotateSpeed;
+    [SerializeField] private float pickupForce = 5;
+
+    [SerializeField] private bool dragForForce = false;
+
+    private Vector3 lastMousePosition;
 
     private HashSet<BaseBlock> blocksCached = new HashSet<BaseBlock>();
 
@@ -20,6 +25,7 @@ public partial class PlayerAttachment : MonoBehaviour
     {
         trigger.OnTriggerEnter += OnPlatformTriggerEnter;
         trigger.OnTriggerExit += OnPlatformTriggerExit;
+        lastMousePosition = Input.mousePosition;
     }
 
     private void OnPlatformTriggerEnter(Collider2D collider) 
@@ -134,5 +140,27 @@ public partial class PlayerAttachment : MonoBehaviour
         DropCurrentObject();
 
         AttachBlock(point.attachPoint, final);
+    }
+
+    private void FixedUpdate()
+    {
+        if (grabbedBlock != null) 
+        {
+            Vector3 mouseoffset;
+            if (dragForForce)
+            {
+                mouseoffset = Input.mousePosition - lastMousePosition;
+                lastMousePosition = Input.mousePosition;
+            }
+            else 
+            {
+                mouseoffset = Vector3.Normalize((_camera.transform.position - Input.mousePosition) - grabbedBlock.transform.position);
+            }
+
+            Rigidbody2D rb = grabbedBlock.GetComponent<Rigidbody2D>();
+
+            rb.AddForce(mouseoffset * pickupForce * Time.deltaTime);
+
+        }
     }
 }
