@@ -51,13 +51,13 @@ public class PlayerAttachment : MonoBehaviour
                     AddSingleAttachmentPoint(localPos + new Vector2Int(0, 1));
                     break;
                 case ((int)BaseBlock.FaceType.Right):
-                   
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(1, 0));
                     break;
                 case ((int)BaseBlock.FaceType.Left):
-                    
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(-1, 0));
                     break;
                 case ((int)BaseBlock.FaceType.Bottom):
-                    
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(0, -1));
                     break;
 
             }

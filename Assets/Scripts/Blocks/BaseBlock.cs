@@ -43,11 +43,13 @@ public class BaseBlock : MonoBehaviour
     /// </summary>
     /// <param name="face"></param>
     /// <returns></returns>
-    public bool CheckFace(FaceType face) 
+    public bool CheckFace(FaceType face)
     {
         List<int> faceList = ReturnAllFaceElements();
 
         return faceList.Contains((int)face);
+    }
+
     private bool[,] blockSlots = new bool[9, 9];
     
     public int BlockWidth
