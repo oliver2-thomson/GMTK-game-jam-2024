@@ -90,6 +90,8 @@ public partial class PlayerAttachment : MonoBehaviour
     }
 
 
+
+
     public void DropCurrentObject() 
     {
         HideUI();
