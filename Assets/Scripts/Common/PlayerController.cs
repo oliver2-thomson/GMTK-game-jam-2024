@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
     // Public variables
     [Header("General Player Settings")]
-    public int MaxHealth;
     [Space(10)]
     [Header("Physics Settings")]
     public float MoveSpeed;
@@ -33,11 +32,13 @@ public class PlayerController : MonoBehaviour
     // Component references
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private CameraController camController;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        camController = FindObjectOfType<CameraController>();
     }
 
     private void Start()
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
                         {
-                            rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
+                            rb.position = new Vector2(rb.position.x, hit.point.y + (col.size.y / 2));
                             isGrounded = true;
                             currentJumpTimer = 0;
                             break;
@@ -229,5 +230,21 @@ public class PlayerController : MonoBehaviour
         // Move all of the blocks by how much the player would be moving
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
         transform.GetChild(0).localPosition += (Vector3)(rb.position - playerNewPos);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<CameraLock>() != null)
+        {
+            camController.CurrentCameraLock = collision.GetComponent<CameraLock>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<CameraLock>() != null)
+        {
+            camController.CurrentCameraLock = null;
+        }
     }
 }
