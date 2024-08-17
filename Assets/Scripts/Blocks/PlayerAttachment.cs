@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttachment : MonoBehaviour
+public partial class PlayerAttachment : MonoBehaviour
 {
 
     BaseBlock[,] BlockList = new BaseBlock[10,10];
@@ -23,6 +23,13 @@ public class PlayerAttachment : MonoBehaviour
     List<AttachmentPoint> allHighlightObjects = new List<AttachmentPoint>();
 
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartBackend();
+        StartVisuals();
+    }
+
     void AttachBlock(Vector2Int localPos, BaseBlock block) 
     {
         if (CheckPositionIfValid(localPos)) 
@@ -35,6 +42,7 @@ public class PlayerAttachment : MonoBehaviour
             BlockList[localPos.x, localPos.y] = block;
             blockAttachmentPoints[localPos.x, localPos.y] = false;
             AddAttachmentsPointsFromBlock(localPos, block);
+            block.AttachedToItem = true;
 
             HideUI();
         }
@@ -103,8 +111,7 @@ public class PlayerAttachment : MonoBehaviour
         return false;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void StartBackend() 
     {
         //Set Brain Spot
         BlockList[5, 5] = brain;
