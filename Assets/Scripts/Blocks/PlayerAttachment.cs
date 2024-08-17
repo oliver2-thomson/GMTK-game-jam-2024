@@ -36,6 +36,8 @@ public class PlayerAttachment : MonoBehaviour
             //Attach block to player
             block.transform.parent = tileParent;
             block.transform.localPosition = ConvertFromLocalBlockToLocalPosition(localPos);
+            Debug.Log(localPos);
+            Debug.Log(block.transform.localPosition);
 
             //Update Internal Tables
             BlockList[localPos.x, localPos.y] = block;

@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
     // Public variables
     [Header("General Player Settings")]
-    public int MaxHealth;
     [Space(10)]
     [Header("Physics Settings")]
     public float MoveSpeed;
@@ -26,8 +25,6 @@ public class PlayerController : MonoBehaviour
     private bool rightInput;
     private bool jumpInput;
 
-    private int currentHealth;
-
     private bool isGrounded;
     private float currentJumpTimer;
     private Vector2 currentVelocity;
@@ -35,16 +32,18 @@ public class PlayerController : MonoBehaviour
     // Component references
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private CameraController camController;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        camController = FindObjectOfType<CameraController>();
     }
 
     private void Start()
     {
-        currentHealth = MaxHealth;
+        FindBottomMostPoint();
     }
 
     private void Update()
@@ -149,7 +148,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
                         {
-                            rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
+                            rb.position = new Vector2(rb.position.x, hit.point.y + (col.size.y / 2));
                             isGrounded = true;
                             currentJumpTimer = 0;
                             break;
@@ -186,15 +185,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnHurt()
-    {
-        currentHealth--;
-        if (currentHealth < 1)
-        {
-            Debug.Log("Game Over!");
-        }
-    }
-
     public void FindBottomMostPoint()
     {
         List<BoxCollider2D> blockChildren = transform.GetChild(0).GetComponentsInChildren<BoxCollider2D>().ToList();
@@ -217,6 +207,17 @@ public class PlayerController : MonoBehaviour
                 lowestBlocks.Add(block);
             }
         }
+        // Get rid of blocks that are too far away from each other, so that the legs dont end up dangling in midair
+        if (lowestBlocks.Count > 1) 
+        {
+            for (int i = lowestBlocks.Count - 1; i > 0; i--)
+            {
+                if ((lowestBlocks[i].transform.position.x - lowestBlocks[i - 1].transform.position.x) > lowestBlocks[i].size.x)
+                {
+                    lowestBlocks.RemoveAt(i);
+                }
+            }
+        }
 
         // Then, find the middle point of those for the new x position
         float totalX = 0f;
@@ -228,9 +229,22 @@ public class PlayerController : MonoBehaviour
 
         // Move all of the blocks by how much the player would be moving
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
-        foreach (BoxCollider2D block in blockChildren)
+        transform.GetChild(0).localPosition += (Vector3)(rb.position - playerNewPos);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<CameraLock>() != null)
         {
-            block.transform.localPosition += (Vector3)(rb.position - playerNewPos);
+            camController.CurrentCameraLock = collision.GetComponent<CameraLock>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<CameraLock>() != null)
+        {
+            camController.CurrentCameraLock = null;
         }
     }
 }

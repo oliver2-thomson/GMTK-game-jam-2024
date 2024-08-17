@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 3
   MoveSpeed: 6
   MoveAccel: 1
   MoveMidairAccel: 0.3
@@ -125,9 +124,10 @@ MonoBehaviour:
   highlightParent: {fileID: 3337704233809163166}
   debugTile: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
     type: 3}
+  brain: {fileID: 0}
   tileOffset: {x: 1, y: 1}
   middleOffset: 5
-  tileParent: {fileID: 1071388798045111833}
+  tileParent: {fileID: 3337704233809163166}
 --- !u!50 &1533263202384909301
 Rigidbody2D:
   serializedVersion: 4
@@ -191,14 +191,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.125, y: 0.1875}
+    oldSize: {x: 1.125, y: 0.25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.2}
+  m_Size: {x: 1, y: 0.25}
   m_EdgeRadius: 0
 --- !u!1001 &3321347761176026397
 PrefabInstance:
@@ -211,12 +211,12 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.11
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
