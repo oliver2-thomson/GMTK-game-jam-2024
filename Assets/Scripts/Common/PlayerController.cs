@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,13 +54,23 @@ public class PlayerController : MonoBehaviour
         rightInput = Input.GetKey(KeyCode.RightArrow);
         if (Input.GetKey(KeyCode.Z))
         {
-            jumpInput = true;
-            currentJumpTimer += Time.deltaTime;
+            if (currentJumpTimer == 0)
+            {
+                jumpInput = true;
+            }
+            if (!isGrounded)
+            {
+                currentJumpTimer += Time.deltaTime;
+            }
         }
         else
         {
             jumpInput = false;
-            currentJumpTimer = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            FindBottomMostPoint();
         }
     }
 
@@ -94,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded)
         {
             // Keep applying vertical velocity if the jump button gets held down
-            if (currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
+            if (jumpInput && currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
             {
                 currentVelocity.y = JumpSpeed;
             }
@@ -117,20 +128,37 @@ public class PlayerController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = false;
-
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y <= 0)
         {
             RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
             foreach (RaycastHit2D hit in groundCheck)
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                /*
+                if (hit.collider.gameObject.CompareTag("Block"))
                 {
                     if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.up)
                     {
-                        rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
-                        isGrounded = true;
+                        isGrounded = false;
                         break;
+                    }
+                }
+                */
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    if (hit.normal == Vector2.up)
+                    {
+                        if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                        {
+                            rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
+                            isGrounded = true;
+                            currentJumpTimer = 0;
+                            break;
+                        }
+                        else
+                        {
+                            isGrounded = false;
+                            break;
+                        }
                     }
                 }
             }
@@ -164,6 +192,46 @@ public class PlayerController : MonoBehaviour
         if (currentHealth < 1)
         {
             Debug.Log("Game Over!");
+        }
+    }
+
+    public void FindBottomMostPoint()
+    {
+        List<BoxCollider2D> blockChildren = GetComponentsInChildren<BoxCollider2D>().ToList();
+        blockChildren.RemoveAt(0);
+
+        // First, find the blocks which are at the bottom of the "stack", for the new y position
+        float lowestY = Mathf.Infinity;
+        List<BoxCollider2D> lowestBlocks = new List<BoxCollider2D>();
+
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            if (block.gameObject.transform.position.y < lowestY)
+            {
+                lowestY = block.transform.position.y;
+            }
+        }
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            if (block.gameObject.transform.position.y == lowestY)
+            {
+                lowestBlocks.Add(block);
+            }
+        }
+
+        // Then, find the middle point of those for the new x position
+        float totalX = 0f;
+        foreach (BoxCollider2D block in lowestBlocks)
+        {
+            totalX += block.transform.position.x;
+        }
+        float middleX = totalX / lowestBlocks.Count();
+
+        // Move all of the blocks by how much the player would be moving
+        Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            block.transform.localPosition += (Vector3)(rb.position - playerNewPos);
         }
     }
 }
