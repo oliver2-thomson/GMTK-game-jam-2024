@@ -1863,6 +1863,11 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -2.24
       objectReference: {fileID: 0}
+    - target: {fileID: 3764913016048316732, guid: 3d765f3c42ad59046983bea2d2356e4a,
+        type: 3}
+      propertyPath: SignFadeSpeed
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 8001474567373900282, guid: 3d765f3c42ad59046983bea2d2356e4a,
         type: 3}
       propertyPath: m_Name
@@ -1941,11 +1946,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7330026274138325423, guid: 434a58b68391b8f4695f26bd54a8ea03,
-        type: 3}
-      propertyPath: MaxHealth
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float MoveMidairAccel;
 
     public float JumpSpeed;
+    public float MaxJumpTime;
     public float Gravity;
 
     // Private variables
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
 
     private bool isGrounded;
+    private float currentJumpTimer;
     private Vector2 currentVelocity;
 
     // Component references
@@ -46,14 +48,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // Processing inputs
         leftInput = Input.GetKey(KeyCode.LeftArrow);
         rightInput = Input.GetKey(KeyCode.RightArrow);
-        jumpInput = Input.GetKey(KeyCode.Z);
+        if (Input.GetKey(KeyCode.Z))
+        {
+            jumpInput = true;
+            currentJumpTimer += Time.deltaTime;
+        }
+        else
+        {
+            jumpInput = false;
+            currentJumpTimer = 0;
+        }
     }
 
     private void FixedUpdate()
     {
-        // Horizontal movement
+        HorizontalMovement();
+
+        GroundCheck();
+        CeilingCheck();
+
+        VerticalMovement();
+
+        // Final velocity update
+        rb.velocity = currentVelocity;
+    }
+
+    private void HorizontalMovement()
+    {
         if (isGrounded)
         {
             currentVelocity.x = Mathf.MoveTowards(rb.velocity.x, MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0), MoveAccel);
@@ -62,43 +86,23 @@ public class PlayerController : MonoBehaviour
         {
             currentVelocity.x = Mathf.MoveTowards(rb.velocity.x, MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0), MoveMidairAccel);
         }
+    }
 
-        // Vertical movement
-        isGrounded = false;
-
-        // Ground check
-        RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
-        foreach (RaycastHit2D hit in groundCheck)
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.up)
-                {
-                    rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
-                    isGrounded = true;
-                    break;
-                }
-            }
-        }
-
-        // Ceiling check
-        RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.up);
-        foreach (RaycastHit2D hit in ceilingCheck)
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.down)
-                {
-                    rb.position = new Vector2(rb.position.x, hit.point.y - col.size.y / 2 - 0.1f);
-                    currentVelocity.y = -Gravity;
-                    break;
-                }
-            }
-        }
-
+    private void VerticalMovement()
+    {
+        // Jumping logic
         if (!isGrounded)
         {
-            currentVelocity.y -= Gravity;
+            // Keep applying vertical velocity if the jump button gets held down
+            if (currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
+            {
+                currentVelocity.y = JumpSpeed;
+            }
+            else
+            {
+                // Falling down if there is no jump input
+                currentVelocity.y -= Gravity;
+            }
         }
         else
         {
@@ -109,9 +113,49 @@ public class PlayerController : MonoBehaviour
                 currentVelocity.y = JumpSpeed;
             }
         }
+    }
 
-        // Final velocity update
-        rb.velocity = currentVelocity;
+    private void GroundCheck()
+    {
+        isGrounded = false;
+
+        if (rb.velocity.y < 0)
+        {
+            RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
+            foreach (RaycastHit2D hit in groundCheck)
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.up)
+                    {
+                        rb.position = new Vector2(rb.position.x, hit.point.y + col.size.y / 2);
+                        isGrounded = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void CeilingCheck()
+    {
+        if (rb.velocity.y > 0)
+        {
+            RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.up);
+            foreach (RaycastHit2D hit in ceilingCheck)
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.down)
+                    {
+                        rb.position = new Vector2(rb.position.x, hit.point.y - col.size.y / 2 - 0.1f);
+                        currentJumpTimer = MaxJumpTime;
+                        currentVelocity.y = -Gravity;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void OnHurt()
