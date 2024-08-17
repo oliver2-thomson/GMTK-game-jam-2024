@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     // Basic settings
+    public bool IsEditingBlocks;
     public bool IsPaused;
 
     // Private variables
@@ -23,6 +24,9 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        // Switching between editing and playing modes
+        
+        // Pausing
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (!IsPaused)

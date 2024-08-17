@@ -16,6 +16,16 @@ public class BaseBlock : MonoBehaviour
     [EnumFlagsAttributes]
     [SerializeField] private FaceType enumType;
     public bool AttachedToItem = false;
+    [Space(10)]
+    public Transform DragSource;
+    public AttachmentPoint CurrentAttPoint;
+
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     public List<int> ReturnAllFaceElements()
     {
@@ -48,5 +58,31 @@ public class BaseBlock : MonoBehaviour
         List<int> faceList = ReturnAllFaceElements();
 
         return faceList.Contains((int)face);
+    }
+
+    public void TurnOnRigidbody()
+    {
+        rb.isKinematic = false;
+    }
+
+    public void TurnOffRigidbody()
+    {
+        rb.isKinematic = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (DragSource != null)
+        {
+            rb.position = DragSource.transform.position;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out AttachmentPoint newPoint))
+        {
+            CurrentAttPoint = newPoint;
+        }
     }
 }
