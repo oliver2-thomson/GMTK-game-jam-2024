@@ -197,8 +197,7 @@ public class PlayerController : MonoBehaviour
 
     public void FindBottomMostPoint()
     {
-        List<BoxCollider2D> blockChildren = GetComponentsInChildren<BoxCollider2D>().ToList();
-        blockChildren.RemoveAt(0);
+        List<BoxCollider2D> blockChildren = transform.GetChild(0).GetComponentsInChildren<BoxCollider2D>().ToList();
 
         // First, find the blocks which are at the bottom of the "stack", for the new y position
         float lowestY = Mathf.Infinity;

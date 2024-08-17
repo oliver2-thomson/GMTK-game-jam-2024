@@ -22,6 +22,12 @@ public class PlayerAttachment : MonoBehaviour
 
     List<AttachmentPoint> allHighlightObjects = new List<AttachmentPoint>();
 
+    private PlayerController playerController;
+
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     void AttachBlock(Vector2Int localPos, BaseBlock block) 
     {
@@ -37,6 +43,9 @@ public class PlayerAttachment : MonoBehaviour
             AddAttachmentsPointsFromBlock(localPos, block);
 
             HideUI();
+
+            //Move player's legs to bottom part of the block "stack"
+            playerController.FindBottomMostPoint();
         }
     }
     
