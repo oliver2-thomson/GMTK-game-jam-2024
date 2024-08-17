@@ -43,8 +43,7 @@ public partial class PlayerAttachment : MonoBehaviour
             //Attach block to player
             block.transform.parent = tileParent;
             block.transform.localPosition = ConvertFromLocalBlockToLocalPosition(localPos);
-            Debug.Log(localPos);
-            Debug.Log(block.transform.localPosition);
+            block.TurnOffRigidbody();
 
             //Update Internal Tables
             BlockList[localPos.x, localPos.y] = block;
@@ -56,6 +55,22 @@ public partial class PlayerAttachment : MonoBehaviour
 
             //Move player's legs to bottom part of the block "stack"
             playerController.FindBottomMostPoint();
+        }
+    }
+
+    public void TryDetachBlock(BaseBlock block)
+    {
+        for (int i = 0; i < BlockList.GetLength(0); i++)
+        {
+            for (int j = 0; j < BlockList.GetLength(1); j++)
+            {
+                if (BlockList[i, j] == block)
+                {
+                    BlockList[i, j] = null;
+                    blockAttachmentPoints[i, j] = false;
+                    block.AttachedToItem = false;
+                }
+            }
         }
     }
     
