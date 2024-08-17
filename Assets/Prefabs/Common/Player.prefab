@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 3
   MoveSpeed: 6
   MoveAccel: 1
   MoveMidairAccel: 0.3
@@ -212,12 +211,12 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.634
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
