@@ -4,60 +4,49 @@ using UnityEngine;
 
 public class BaseBlock : MonoBehaviour
 {
-    private bool[,] blockSlots = new bool[9, 9];
-    
-    public int BlockWidth
+    [System.Flags]
+    public enum FaceType
     {
-        get 
+        Top = 0, 
+        Right = 1, 
+        Bottom = 2, 
+        Left = 3
+    }
+
+    [EnumFlagsAttributes]
+    private FaceType enumType;
+
+
+    public List<int> ReturnAllFaceElements()
+    {
+        List<int> selectedElements = new List<int>();
+        for (int i = 0; i < System.Enum.GetValues(typeof(FaceType)).Length; i++)
         {
-            return blockWidth;
-        }
-        set 
-        {
-            if (BlockWidth != value)
+            int layer = 1 << i;
+            if (((int)enumType & layer) != 0)
             {
-                blockWidth = value;
-                PopulateBlockSlots();
+                selectedElements.Add(i);
             }
         }
+
+        return selectedElements;
     }
 
-    public int BlockHeight
+    public void OnPlacedTile() 
     {
-        get
-        {
-            return blockHeight;
-        }
-        set
-        {
-            if (blockHeight != value)
-            {
-                blockHeight = value;
-                PopulateBlockSlots();
-            }
-        }
+        //Todo parse oriational data to block
     }
 
 
-    [HideInInspector] [SerializeField] private int blockWidth;
-    [HideInInspector] [SerializeField] private int blockHeight;
-    BaseBlock(int width, int height) 
+    /// <summary>
+    /// Use this to Check what face is an attachable point on a block
+    /// </summary>
+    /// <param name="face"></param>
+    /// <returns></returns>
+    public bool CheckFace(FaceType face) 
     {
-        blockWidth = width;
-        blockHeight = height;
+        List<int> faceList = ReturnAllFaceElements();
 
-        blockSlots = new bool[blockWidth, blockHeight];
-    }
-
-    [ContextMenu("PopulateBlockSlots")]
-    private void PopulateBlockSlots() 
-    {
-        blockSlots = new bool[blockWidth + 2, blockHeight + 2];
-    }
-
-
-    private bool GetLocalTileSlot(Vector2Int localPosition) 
-    {
-        return blockSlots[localPosition.x, localPosition.y];
+        return faceList.Contains((int)face);
     }
 }
