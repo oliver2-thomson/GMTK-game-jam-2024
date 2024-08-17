@@ -14,7 +14,7 @@ public class BaseBlock : MonoBehaviour
     }
 
     [EnumFlagsAttributes]
-    private FaceType enumType;
+    [SerializeField] private FaceType enumType;
 
 
     public List<int> ReturnAllFaceElements()
