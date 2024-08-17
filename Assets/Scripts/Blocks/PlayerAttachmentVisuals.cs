@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public partial class PlayerAttachment : MonoBehaviour
 {
     [Space]
     [Header("Pickup Attributes")]
     [SerializeField] TriggerEvents2D trigger;
+    [SerializeField] private Camera _camera;
     [SerializeField] LayerMask MouseInteractions;
 
     [SerializeField] Transform pickupCube;
@@ -58,15 +58,17 @@ public partial class PlayerAttachment : MonoBehaviour
     private void RaycastToFindShit()
     {
         Vector3 mousePos = Input.mousePosition;
-        RaycastHit2D hit2D = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0f, MouseInteractions);
-
-        if (hit2D)
+        RaycastHit2D hit2D = Physics2D.Raycast(_camera.ScreenPointToRay(Input.mousePosition).origin, _camera.ScreenPointToRay(Input.mousePosition).direction, 100f, MouseInteractions);
+        //Stupid Ray cast >:(
+        //Debug.DrawRay(_camera.ScreenPointToRay(Input.mousePosition).origin, _camera.ScreenPointToRay(Input.mousePosition).direction, Color.blue, 10);
+        if (hit2D.collider != null)
         {
+            Debug.Log(hit2D.collider);
             //Check if UI collider or Attachable thing
             AttachmentPoint attacher = hit2D.collider.GetComponentInParent<AttachmentPoint>();
             BaseBlock baseblock = hit2D.collider.GetComponentInParent<BaseBlock>();
 
-            if (attacher != null)
+            if (grabbedBlock != null && attacher != null)
             {
                 LockInBlockAnimation(attacher);
             }
@@ -74,12 +76,12 @@ public partial class PlayerAttachment : MonoBehaviour
             {
                 if (grabbedBlock) 
                 {
-                    //StopCoroutine(SpinPickedObject());
+                    StopSpinning();
                     DropCurrentObject();
                 }
-                Debug.Log("hit object");
 
-                if (blocksCached.Contains(baseblock)) 
+
+                if (blocksCached.Contains(baseblock) && !baseblock.AttachedToItem) 
                 {
                     PickupBlockAnimation(baseblock);
                 }        
@@ -90,6 +92,7 @@ public partial class PlayerAttachment : MonoBehaviour
 
     public void DropCurrentObject() 
     {
+        HideUI();
         grabbedBlock.transform.parent = null;
         grabbedBlock.transform.rotation = Quaternion.identity;
         grabbedBlock = null;
@@ -98,16 +101,36 @@ public partial class PlayerAttachment : MonoBehaviour
     public void PickupBlockAnimation(BaseBlock block) 
     {
         ShowAttachmentUI();
-        block.transform.parent = pickupCube.parent;
+        block.transform.parent = pickupCube;
         block.transform.localPosition = Vector3.zero;
-        //StartCoroutine(SpinPickedObject());
+        grabbedBlock = block;
+        StartSpinning();
     }
 
+    private void StartSpinning() 
+    {
+        Beyblade rotate = grabbedBlock.gameObject.AddComponent<Beyblade>();
+    }
+    private void StopSpinning() 
+    {
+        Beyblade rotate = grabbedBlock.gameObject.GetComponent<Beyblade>();
+        if (rotate) 
+        {
+            Destroy(rotate);
+        }
+        else 
+        {
+            Debug.LogError("Lost spinny thing, not good!");
+        }
+    }
  
     public void LockInBlockAnimation(AttachmentPoint point) 
     {
-        //StopCoroutine(SpinPickedObject());
-        AttachBlock(point.attachPoint, grabbedBlock);
+        StopSpinning();
+        BaseBlock final = grabbedBlock;
 
+        DropCurrentObject();
+
+        AttachBlock(point.attachPoint, final);
     }
 }

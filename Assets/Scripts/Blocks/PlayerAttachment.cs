@@ -42,6 +42,7 @@ public partial class PlayerAttachment : MonoBehaviour
             BlockList[localPos.x, localPos.y] = block;
             blockAttachmentPoints[localPos.x, localPos.y] = false;
             AddAttachmentsPointsFromBlock(localPos, block);
+            block.AttachedToItem = true;
 
             HideUI();
         }
