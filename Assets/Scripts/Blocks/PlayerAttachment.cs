@@ -12,6 +12,7 @@ public class PlayerAttachment : MonoBehaviour
     [SerializeField] private GameObject highlight_prefab;
     [SerializeField] private Transform highlightParent;
     [SerializeField] private GameObject debugTile;
+    [SerializeField] private BrainBlock brain;
 
     [Header("Tile Positional Data")]
     [SerializeField] Vector2 tileOffset = new Vector2(1,1);
@@ -69,13 +70,22 @@ public class PlayerAttachment : MonoBehaviour
     {
         if (!CheckBlockExists(offsetPoint)) 
         {
-            
+            blockAttachmentPoints[offsetPoint.x, offsetPoint.y] = true;
         }
     }
 
     bool CheckBlockExists(Vector2Int pos) 
     {
-        return BlockList[pos.x, pos.y] == null;
+        if (pos.x < 0 || pos.x > BlockList.GetLength(0)) 
+        {
+            return true;
+        }
+        else if (pos.y < 0 || pos.y > BlockList.GetLength(0)) 
+        {
+            return true;
+        }
+
+        return BlockList[pos.x, pos.y] != null;
     }
 
     bool CheckPositionIfValid(Vector2Int position) 
@@ -96,6 +106,9 @@ public class PlayerAttachment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Set Brain Spot
+        BlockList[5, 5] = brain;
+
         //Set all sides for default attachments
         blockAttachmentPoints[4, 5] = true;
         blockAttachmentPoints[5, 4] = true;
@@ -150,7 +163,7 @@ public class PlayerAttachment : MonoBehaviour
 
     private Vector3 ConvertFromLocalBlockToLocalPosition(Vector2Int localPos) 
     {
-        return new Vector3(localPos.x - middleOffset * tileOffset.x, localPos.y - middleOffset * tileOffset.y);
+        return new Vector3((localPos.x - middleOffset) * tileOffset.x, (localPos.y - middleOffset) * tileOffset.y);
     }
 
     [ContextMenu("HideAttachments")]
