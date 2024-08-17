@@ -48,16 +48,16 @@ public class PlayerAttachment : MonoBehaviour
             switch (Id) 
             {
                 case ((int)BaseBlock.FaceType.Top):
-                    Debug.Log("Top");
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(0, 1));
                     break;
                 case ((int)BaseBlock.FaceType.Right):
-                    Debug.Log("Right");
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(1, 0));
                     break;
                 case ((int)BaseBlock.FaceType.Left):
-                    Debug.Log("left");
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(-1, 0));
                     break;
                 case ((int)BaseBlock.FaceType.Bottom):
-                    Debug.Log("bottom");
+                    AddSingleAttachmentPoint(localPos + new Vector2Int(0, -1));
                     break;
 
             }
@@ -65,6 +65,18 @@ public class PlayerAttachment : MonoBehaviour
         }
     }
 
+    void AddSingleAttachmentPoint(Vector2Int offsetPoint) 
+    {
+        if (!CheckBlockExists(offsetPoint)) 
+        {
+            
+        }
+    }
+
+    bool CheckBlockExists(Vector2Int pos) 
+    {
+        return BlockList[pos.x, pos.y] == null;
+    }
 
     bool CheckPositionIfValid(Vector2Int position) 
     {
