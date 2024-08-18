@@ -80,14 +80,9 @@ public class PlayerController : MonoBehaviour
         VerticalMovement();
 
         // Final velocity update
-        if (Time.deltaTime < 0.033)
-        {
-            rb.velocity = currentVelocity;
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+        //TO DO SET VELOCITY TO ADD FORCE
+        //COULD DO THIS BY FINDING DIFFERENCE AND CLAMPING IT TO POSITIVE VALUES
+        rb.velocity = currentVelocity;
     }
 
     private void HorizontalMovement()

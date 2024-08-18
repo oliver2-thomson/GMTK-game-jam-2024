@@ -14,8 +14,22 @@ public class BaseBlock : MonoBehaviour
         Left = 3
     }
 
+    public enum ImpactMaterial
+    {
+        Metal = 0,
+        Wood = 1,
+        Dirt = 2,
+        Blood = 3,
+        Stone = 4
+    }
+
     [EnumFlagsAttributes]
+    [Tooltip("Select what faces are attachable from this")]
+
     [SerializeField] private FaceType enumType;
+    [SerializeField] private float MaxHealth;
+    [SerializeField] private ImpactMaterial material; 
+
     public bool AttachedToItem = false;
     [Space(10)]
     [Header("REQUIRED")]
@@ -23,6 +37,37 @@ public class BaseBlock : MonoBehaviour
 
     [HideInInspector] public Transform DragSource;
     [HideInInspector] public AttachmentPoint CurrentAttPoint;
+
+    public float _Health 
+    {
+        get 
+        {
+            return currentHealth;
+        }
+        set 
+        {
+            if (value > MaxHealth)
+            {
+                currentHealth = MaxHealth;
+            }
+            else 
+            {
+                currentHealth = value;
+            }
+        }
+    }
+
+    private float currentHealth;
+
+
+    public void DamageAtPoint(Vector2 point) 
+    {
+        ImpactPropertiesManager.instance.PlayImpactPropertyAtPoint(material, point);
+    }
+    public void DamageBlock() 
+    {
+        
+    }
 
     public List<int> ReturnAllFaceElements()
     {
