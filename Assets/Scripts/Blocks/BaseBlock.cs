@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BaseBlock : MonoBehaviour
 {
     [System.Flags]
     public enum FaceType
     {
-        Top = 0, 
-        Right = 1, 
-        Bottom = 2, 
+        Top = 0,
+        Right = 1,
+        Bottom = 2,
         Left = 3
     }
 
     [EnumFlagsAttributes]
     [SerializeField] private FaceType enumType;
+    public bool AttachedToItem = false;
+    [Space(10)]
+    [Header("REQUIRED")]
+    public RigidBodyCache rbCache;
 
+    [HideInInspector] public Transform DragSource;
+    [HideInInspector] public AttachmentPoint CurrentAttPoint;
 
     public List<int> ReturnAllFaceElements()
     {
@@ -32,7 +39,7 @@ public class BaseBlock : MonoBehaviour
         return selectedElements;
     }
 
-    public void OnPlacedTile() 
+    public void OnPlacedTile()
     {
         //Todo parse oriational data to block
     }
@@ -50,60 +57,11 @@ public class BaseBlock : MonoBehaviour
         return faceList.Contains((int)face);
     }
 
-    private bool[,] blockSlots = new bool[9, 9];
-    
-    public int BlockWidth
+    private void FixedUpdate()
     {
-        get 
+        if (DragSource != null)
         {
-            return blockWidth;
+            rbCache.rb.position = DragSource.transform.position;
         }
-        set 
-        {
-            if (BlockWidth != value)
-            {
-                blockWidth = value;
-                PopulateBlockSlots();
-            }
-        }
-    }
-
-    public int BlockHeight
-    {
-        get
-        {
-            return blockHeight;
-        }
-        set
-        {
-            if (blockHeight != value)
-            {
-                blockHeight = value;
-                PopulateBlockSlots();
-            }
-        }
-    }
-
-
-    [HideInInspector] [SerializeField] private int blockWidth;
-    [HideInInspector] [SerializeField] private int blockHeight;
-    BaseBlock(int width, int height) 
-    {
-        blockWidth = width;
-        blockHeight = height;
-
-        blockSlots = new bool[blockWidth, blockHeight];
-    }
-
-    [ContextMenu("PopulateBlockSlots")]
-    private void PopulateBlockSlots() 
-    {
-        blockSlots = new bool[blockWidth + 2, blockHeight + 2];
-    }
-
-
-    private bool GetLocalTileSlot(Vector2Int localPosition) 
-    {
-        return blockSlots[localPosition.x, localPosition.y];
     }
 }

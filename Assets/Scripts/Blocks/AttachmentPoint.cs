@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AttachmentPoint : MonoBehaviour
 {
-    [HideInInspector] public Vector2Int attachPoint;
+    public Vector2Int attachPoint;
 }
