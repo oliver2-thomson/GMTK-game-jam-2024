@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Processing inputs
-        leftInput = Input.GetKey(KeyCode.LeftArrow);
-        rightInput = Input.GetKey(KeyCode.RightArrow);
-        if (Input.GetKey(KeyCode.Z))
+        leftInput = Input.GetKey(KeyCode.A);
+        rightInput = Input.GetKey(KeyCode.D);
+        if (Input.GetKey(KeyCode.W))
         {
             if (currentJumpTimer == 0)
             {
@@ -65,11 +65,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             jumpInput = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            FindBottomMostPoint();
         }
     }
 
@@ -220,18 +215,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Deactive the block colliders that are right above the player
+        /* Deactive the block colliders that are right above the player
         foreach (BoxCollider2D block in blockChildren)
         {
             if (lowestBlocks.Contains(block))
             {
-                block.attachedRigidbody.simulated = false;
+                Physics2D.IgnoreCollision(block, col);
+                Debug.Log(block);
             }
-            else
-            {
-                block.attachedRigidbody.simulated = true;
-            }
-        }
+        }*/
 
         // Then, find the middle point of those for the new x position
         float totalX = 0f;
@@ -242,7 +234,7 @@ public class PlayerController : MonoBehaviour
         float middleX = totalX / lowestBlocks.Count();
 
         // Move all of the blocks by how much the player would be moving
-        Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
+        Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2) - 0.1f);
         transform.GetChild(0).localPosition += (Vector3)(rb.position - playerNewPos);
     }
 
