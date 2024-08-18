@@ -8,14 +8,8 @@ public partial class PlayerAttachment : MonoBehaviour
     [Header("Pickup Attributes")]
     [SerializeField] TriggerEvents2D trigger;
     [SerializeField] private Camera _camera;
-    [SerializeField] LayerMask MouseInteractions;
-
-    [SerializeField] Transform pickupCube;
-    [SerializeField] float pickupRotateSpeed;
 
     private HashSet<BaseBlock> blocksCached = new HashSet<BaseBlock>();
-
-    public BaseBlock grabbedBlock;
     private void StartVisuals() 
     {
         trigger.OnTriggerEnter += OnPlatformTriggerEnter;
@@ -45,28 +39,8 @@ public partial class PlayerAttachment : MonoBehaviour
         }
     }
 
-    public void DropCurrentObject() 
+    public bool IsBlockWithinDistance(BaseBlock block) 
     {
-        HideUI();
-        grabbedBlock.transform.parent = null;
-        grabbedBlock.transform.rotation = Quaternion.identity;
-        grabbedBlock = null;
-    }
-
-    public void PickupBlockAnimation(BaseBlock block) 
-    {
-        ShowAttachmentUI();
-        block.transform.parent = pickupCube;
-        block.transform.localPosition = Vector3.zero;
-        grabbedBlock = block;
-    }
- 
-    public void LockInBlockAnimation(AttachmentPoint point) 
-    {
-        BaseBlock final = grabbedBlock;
-
-        DropCurrentObject();
-
-        AttachBlock(point.attachPoint, final);
+        return blocksCached.Contains(block);
     }
 }
