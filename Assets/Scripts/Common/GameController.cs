@@ -34,10 +34,8 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             IsEditingBlocks = true;
-            foreach (Camera newCam in cameraData.cameraStack)
-            {
-                newCam.enabled = true;
-            }
+            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeIn");
+            //cameraData.cameraStack[0].enabled = true;
 
             Player.ShowAttachmentUI();
         }
@@ -45,10 +43,8 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             IsEditingBlocks = false;
-            foreach (Camera newCam in cameraData.cameraStack)
-            {
-                newCam.enabled = false;
-            }
+            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
+            //cameraData.cameraStack[0].enabled = false;
 
             Player.HideUI();
         }
