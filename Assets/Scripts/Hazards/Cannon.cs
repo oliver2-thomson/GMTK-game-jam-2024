@@ -5,6 +5,9 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     public GameObject target;
+    public GameObject projectilePrefab;
+    public float projectilePower;
+    private List<GameObject> projectiles = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -15,5 +18,15 @@ public class Cannon : MonoBehaviour
 
         float angle = Mathf.Atan2(yDelta, xDelta) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+
+    [ContextMenu("Fire")]
+    public void Fire()
+    {
+        Vector3 displacement = target.transform.position - transform.position;
+        GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
+        rb.AddForce(displacement.normalized * projectilePower);
+        projectiles.Add(newProjectile);
     }
 }
