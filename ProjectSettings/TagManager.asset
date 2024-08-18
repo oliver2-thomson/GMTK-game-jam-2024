@@ -17,7 +17,7 @@ TagManager:
   - PlatformTriggerOnly
   - Platform
   - ConnectionPoint
-  - 
+  - EditingUI
   - 
   - 
   - 
@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2541477233
+    locked: 0
+  - name: BackUI
+    uniqueID: 3962283451
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 1775061845
+    locked: 0
+  - name: FrontUI
+    uniqueID: 1965376803
     locked: 0

@@ -27,76 +27,81 @@ public class PlayerMouse : MonoBehaviour
 
     private void Update()
     {
-        clickInput = Input.GetMouseButton(0);
-
-        transform.position = Camera.ScreenToWorldPoint(Input.mousePosition);
-
-        //Update Line Renderer
-        if (lineRender != null)
+        if (GameController.instance.IsEditingBlocks)
         {
-            lineRender.gameObject.SetActive(ObjectGrabbed != null);
-        }
+            clickInput = Input.GetMouseButton(0);
 
-        if (ObjectGrabbed != null)
-        {
+            transform.position = Camera.ScreenToWorldPoint(Input.mousePosition);
 
-            // Rotating the ball
-            if (canRotate)
+            //Update Line Renderer
+            if (lineRender != null)
             {
-                if (Input.mouseScrollDelta.y != 0)
-                {
-                    StartCoroutine(RotateObject(Mathf.Sign(Input.mouseScrollDelta.y)));
-                }
+                lineRender.gameObject.SetActive(ObjectGrabbed != null);
             }
-            
-            // Dropping the currently-held ball
-            if (!clickInput)
+
+
+            if (ObjectGrabbed != null)
             {
-
-                { //Get Closest Attachment point
-
-                    Collider2D objectCollider = ObjectGrabbed.GetComponent<Collider2D>();
-
-                    RaycastHit2D hitCollider = Physics2D.BoxCast(
-                                            objectCollider.bounds.center, 
-                                            objectCollider.bounds.size, 
-                                            0, 
-                                            Vector2.up, 
-                                            10, 
-                                            attachmentPointLayer);
-
-                    if (hitCollider.collider != null)
-                    {
-                        AttachmentPoint attch = hitCollider.collider.GetComponentInParent<AttachmentPoint>();
-                        Debug.Log(attch);
-                        ObjectGrabbed.CurrentAttPoint = attch;
-                    }
-                    else 
-                    {
-                        ObjectGrabbed.CurrentAttPoint = null;
-                    }
-                }
-
-                if (ObjectGrabbed.CurrentAttPoint != null)
+                // Rotating the ball
+                if (canRotate)
                 {
-                    Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
+                    if (Input.mouseScrollDelta.y != 0)
+                    {
+                        StartCoroutine(RotateObject(Mathf.Sign(Input.mouseScrollDelta.y)));
+                    }
                 }
-                ObjectGrabbed.DragSource = null;
-                ObjectGrabbed = null;
+
+                // Dropping the currently-held ball
+                if (!clickInput)
+                {
+
+                    { //Get Closest Attachment point
+
+                        Collider2D objectCollider = ObjectGrabbed.GetComponent<Collider2D>();
+
+                        RaycastHit2D hitCollider = Physics2D.BoxCast(
+                                                objectCollider.bounds.center,
+                                                objectCollider.bounds.size,
+                                                0,
+                                                Vector2.up,
+                                                10,
+                                                attachmentPointLayer);
+
+                        if (hitCollider.collider != null)
+                        {
+                            AttachmentPoint attch = hitCollider.collider.GetComponentInParent<AttachmentPoint>();
+                            Debug.Log(attch);
+                            ObjectGrabbed.CurrentAttPoint = attch;
+                        }
+                        else
+                        {
+                            ObjectGrabbed.CurrentAttPoint = null;
+                        }
+                    }
+
+                    if (ObjectGrabbed.CurrentAttPoint != null)
+                    {
+                        Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
+                    }
+                    ObjectGrabbed.DragSource = null;
+                    ObjectGrabbed = null;
+                }
             }
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Block"))
+        if (GameController.instance.IsEditingBlocks)
         {
-            if (clickInput)
+            if (collision.gameObject.CompareTag("Block"))
             {
-                if (ObjectGrabbed == null)
+                if (clickInput)
                 {
-                    BaseBlock blockComp = collision.gameObject.GetComponent<BaseBlock>();
-                    ObjectGrabbed = blockComp;
+                    if (ObjectGrabbed == null)
+                    {
+                        BaseBlock blockComp = collision.gameObject.GetComponent<BaseBlock>();
+                        ObjectGrabbed = blockComp;
 
                     if (blockComp.AttachedToItem) 
                     {

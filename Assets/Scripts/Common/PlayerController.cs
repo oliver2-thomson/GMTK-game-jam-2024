@@ -32,12 +32,14 @@ public class PlayerController : MonoBehaviour
     // Component references
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private CompositeCollider2D compCol;
     private PlayerAttachment playerAttacher;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        compCol = GetComponent<CompositeCollider2D>();
         playerAttacher = GetComponent<PlayerAttachment>();
     }
 
@@ -49,9 +51,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Processing inputs
-        leftInput = Input.GetKey(KeyCode.LeftArrow);
-        rightInput = Input.GetKey(KeyCode.RightArrow);
-        if (Input.GetKey(KeyCode.Z))
+        leftInput = Input.GetKey(KeyCode.A);
+        rightInput = Input.GetKey(KeyCode.D);
+        if (Input.GetKey(KeyCode.W))
         {
             if (currentJumpTimer == 0)
             {
@@ -65,11 +67,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             jumpInput = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            FindBottomMostPoint();
         }
     }
 
@@ -132,25 +129,16 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y <= 0)
         {
             RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
+
             foreach (RaycastHit2D hit in groundCheck)
             {
-                /*
-                if (hit.collider.gameObject.CompareTag("Block"))
-                {
-                    if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.up)
-                    {
-                        isGrounded = false;
-                        break;
-                    }
-                }
-                */
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     if (hit.normal == Vector2.up)
                     {
                         if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
                         {
-                            rb.position = new Vector2(rb.position.x, hit.point.y + (col.size.y / 2));
+                            rb.position = new Vector2(rb.position.x, hit.point.y + (col.size.y / 2) - col.offset.y);
                             isGrounded = true;
                             currentJumpTimer = 0;
                             break;
@@ -222,20 +210,49 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        /* Deactive the block colliders that are right above the player
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            if (lowestBlocks.Contains(block))
+            {
+                Physics2D.IgnoreCollision(block, col);
+                Debug.Log(block);
+            }
+        }*/
+
         // Then, find the middle point of those for the new x position
-        float totalX = 0f;
+        float totalLowestX = 0f;
         foreach (BoxCollider2D block in lowestBlocks)
         {
-            totalX += block.transform.position.x;
+            totalLowestX += block.transform.position.x;
         }
-        float middleX = totalX / lowestBlocks.Count();
+        float middleX = totalLowestX / lowestBlocks.Count();
 
         // Move all of the blocks by how much the player would be moving
-        
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
         playerAttacher.tileParent.localPosition += (Vector3)(rb.position - playerNewPos);
-        
-        //Todo Stretch lowest block collider to full width to get smooth climbing with bulkier builds
-        //col.size = new Vector2(totalX, col.size.y);
+
+
+        // (Still WIP) Stretching the player's collider width to get smooth climbing with bulkier builds
+        List<float> blockXpositions = new List<float>();
+        foreach (BoxCollider2D block in blockChildren)
+        {
+            blockXpositions.Add(block.transform.position.x);
+        }
+        blockXpositions.Sort();
+
+        col.size = new Vector2(
+            (blockXpositions[blockXpositions.Count - 1] - blockXpositions[0]) + blockChildren[0].size.x,
+            col.size.y);
+
+        // Adjusting player collider offset for the new size
+        if (blockXpositions[0] <= rb.position.x - (col.size.x / 2))
+        {
+            col.offset -= new Vector2(blockChildren[0].size.x / 2, 0);
+        }
+        if (blockXpositions[blockXpositions.Count - 1] >= rb.position.x + (col.size.x / 2))
+        {
+            col.offset += new Vector2(blockChildren[0].size.x / 2, 0);
+        }
     }
 }
