@@ -16,6 +16,14 @@ public class PlayerMouse : MonoBehaviour
     private bool clickInput;
     private bool canRotate = true;
 
+    private void Awake()
+    {
+        //Stop this from being on the player directly
+        //So that Player Center isn't offset weirdly (shouldn't matter but it was annoying me)
+
+        this.transform.parent = null;
+    }
+
     private void Update()
     {
         clickInput = Input.GetMouseButton(0);
