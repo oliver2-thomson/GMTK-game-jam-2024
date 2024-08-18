@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttachment : MonoBehaviour
+public partial class PlayerAttachment : MonoBehaviour
 {
 
     BaseBlock[,] BlockList = new BaseBlock[10,10];
@@ -11,32 +11,67 @@ public class PlayerAttachment : MonoBehaviour
     [Header("REQUIRED")]
     [SerializeField] private GameObject highlight_prefab;
     [SerializeField] private Transform highlightParent;
-    [SerializeField] private GameObject debugTile;
     [SerializeField] private BrainBlock brain;
 
     [Header("Tile Positional Data")]
     [SerializeField] Vector2 tileOffset = new Vector2(1,1);
     [Tooltip("Defines where the midpoint of the character starts")]
     [SerializeField] int middleOffset = 5;
-    [SerializeField] Transform tileParent;
+    [SerializeField] public Transform tileParent;
 
     List<AttachmentPoint> allHighlightObjects = new List<AttachmentPoint>();
 
+    private PlayerController playerController;
 
-    void AttachBlock(Vector2Int localPos, BaseBlock block) 
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartBackend();
+        StartVisuals();
+    }
+
+    public void AttachBlock(Vector2Int localPos, BaseBlock block) 
     {
         if (CheckPositionIfValid(localPos)) 
         {
             //Attach block to player
             block.transform.parent = tileParent;
             block.transform.localPosition = ConvertFromLocalBlockToLocalPosition(localPos);
+            
 
             //Update Internal Tables
             BlockList[localPos.x, localPos.y] = block;
             blockAttachmentPoints[localPos.x, localPos.y] = false;
             AddAttachmentsPointsFromBlock(localPos, block);
+            block.AttachedToItem = true;
+            block.rbCache.DeleteOldRigidbody();
 
             HideUI();
+
+            //Move player's legs to bottom part of the block "stack"
+            playerController.FindBottomMostPoint();
+        }
+    }
+
+    public void TryDetachBlock(BaseBlock block)
+    {
+        // WIP - we need to reorganise the block list and all attachment points if a block gets removed
+        for (int i = 0; i < BlockList.GetLength(0); i++)
+        {
+            for (int j = 0; j < BlockList.GetLength(1); j++)
+            {
+                if (BlockList[i, j] == block)
+                {
+                    BlockList[i, j] = null;
+                    //blockAttachmentPoints[i, j] = false;
+                    block.AttachedToItem = false;
+                }
+            }
         }
     }
     
@@ -103,8 +138,7 @@ public class PlayerAttachment : MonoBehaviour
         return false;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void StartBackend() 
     {
         //Set Brain Spot
         BlockList[5, 5] = brain;
@@ -175,10 +209,8 @@ public class PlayerAttachment : MonoBehaviour
         }
     }
 
-
-    [ContextMenu("TestAttachment")]
-    void TestAttachment()
+    private void Update()
     {
-        AttachBlock(allHighlightObjects[0].attachPoint, GameObject.Instantiate(debugTile).GetComponent<BaseBlock>());
+        Debug.Log(blockAttachmentPoints[5, 6]);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BaseBlock : MonoBehaviour
 {
     [System.Flags]
@@ -15,7 +16,13 @@ public class BaseBlock : MonoBehaviour
 
     [EnumFlagsAttributes]
     [SerializeField] private FaceType enumType;
+    public bool AttachedToItem = false;
+    [Space(10)]
+    [Header("REQUIRED")]
+    public RigidBodyCache rbCache;
 
+    [HideInInspector] public Transform DragSource;
+    [HideInInspector] public AttachmentPoint CurrentAttPoint;
 
     public List<int> ReturnAllFaceElements()
     {
@@ -48,5 +55,13 @@ public class BaseBlock : MonoBehaviour
         List<int> faceList = ReturnAllFaceElements();
 
         return faceList.Contains((int)face);
+    }
+
+    private void FixedUpdate()
+    {
+        if (DragSource != null)
+        {
+            rbCache.rb.position = DragSource.transform.position;
+        }
     }
 }
