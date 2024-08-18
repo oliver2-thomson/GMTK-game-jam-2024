@@ -11,14 +11,13 @@ public partial class PlayerAttachment : MonoBehaviour
     [Header("REQUIRED")]
     [SerializeField] private GameObject highlight_prefab;
     [SerializeField] private Transform highlightParent;
-    [SerializeField] private GameObject debugTile;
     [SerializeField] private BrainBlock brain;
 
     [Header("Tile Positional Data")]
     [SerializeField] Vector2 tileOffset = new Vector2(1,1);
     [Tooltip("Defines where the midpoint of the character starts")]
     [SerializeField] int middleOffset = 5;
-    [SerializeField] Transform tileParent;
+    [SerializeField] public Transform tileParent;
 
     List<AttachmentPoint> allHighlightObjects = new List<AttachmentPoint>();
 
@@ -36,20 +35,21 @@ public partial class PlayerAttachment : MonoBehaviour
         StartVisuals();
     }
 
-    void AttachBlock(Vector2Int localPos, BaseBlock block) 
+    public void AttachBlock(Vector2Int localPos, BaseBlock block) 
     {
         if (CheckPositionIfValid(localPos)) 
         {
             //Attach block to player
             block.transform.parent = tileParent;
             block.transform.localPosition = ConvertFromLocalBlockToLocalPosition(localPos);
-            block.TurnOffRigidbody();
+            
 
             //Update Internal Tables
             BlockList[localPos.x, localPos.y] = block;
             blockAttachmentPoints[localPos.x, localPos.y] = false;
             AddAttachmentsPointsFromBlock(localPos, block);
             block.AttachedToItem = true;
+            block.rbCache.DeleteOldRigidbody();
 
             HideUI();
 
@@ -68,7 +68,7 @@ public partial class PlayerAttachment : MonoBehaviour
                 if (BlockList[i, j] == block)
                 {
                     BlockList[i, j] = null;
-                    blockAttachmentPoints[i, j] = false;
+                    //blockAttachmentPoints[i, j] = false;
                     block.AttachedToItem = false;
                 }
             }
@@ -209,10 +209,8 @@ public partial class PlayerAttachment : MonoBehaviour
         }
     }
 
-
-    [ContextMenu("TestAttachment")]
-    void TestAttachment()
+    private void Update()
     {
-        AttachBlock(allHighlightObjects[0].attachPoint, GameObject.Instantiate(debugTile).GetComponent<BaseBlock>());
+        Debug.Log(blockAttachmentPoints[5, 6]);
     }
 }

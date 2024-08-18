@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     // Public variables
     [Header("General Player Settings")]
+
     [Space(10)]
     [Header("Physics Settings")]
     public float MoveSpeed;
@@ -32,13 +32,13 @@ public class PlayerController : MonoBehaviour
     // Component references
     private Rigidbody2D rb;
     private BoxCollider2D col;
-    private CameraController camController;
+    private PlayerAttachment playerAttacher;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
-        camController = FindObjectOfType<CameraController>();
+        playerAttacher = GetComponent<PlayerAttachment>();
     }
 
     private void Start()
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
     public void FindBottomMostPoint()
     {
-        List<BoxCollider2D> blockChildren = transform.GetChild(0).GetComponentsInChildren<BoxCollider2D>().ToList();
+        List<BoxCollider2D> blockChildren = playerAttacher.tileParent.GetComponentsInChildren<BoxCollider2D>().ToList();
 
         // First, find the blocks which are at the bottom of the "stack", for the new y position
         float lowestY = Mathf.Infinity;
@@ -242,23 +242,11 @@ public class PlayerController : MonoBehaviour
         float middleX = totalX / lowestBlocks.Count();
 
         // Move all of the blocks by how much the player would be moving
+        
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
-        transform.GetChild(0).localPosition += (Vector3)(rb.position - playerNewPos);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<CameraLock>() != null)
-        {
-            camController.CurrentCameraLock = collision.GetComponent<CameraLock>();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.GetComponent<CameraLock>() != null)
-        {
-            camController.CurrentCameraLock = null;
-        }
+        playerAttacher.tileParent.localPosition += (Vector3)(rb.position - playerNewPos);
+        
+        //Todo Stretch lowest block collider to full width to get smooth climbing with bulkier builds
+        //col.size = new Vector2(totalX, col.size.y);
     }
 }

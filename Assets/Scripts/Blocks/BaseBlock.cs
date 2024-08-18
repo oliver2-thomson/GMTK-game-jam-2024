@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BaseBlock : MonoBehaviour
 {
     [System.Flags]
@@ -17,15 +18,11 @@ public class BaseBlock : MonoBehaviour
     [SerializeField] private FaceType enumType;
     public bool AttachedToItem = false;
     [Space(10)]
-    public Transform DragSource;
-    public AttachmentPoint CurrentAttPoint;
+    [Header("REQUIRED")]
+    public RigidBodyCache rbCache;
 
-    private Rigidbody2D rb;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    [HideInInspector] public Transform DragSource;
+    [HideInInspector] public AttachmentPoint CurrentAttPoint;
 
     public List<int> ReturnAllFaceElements()
     {
@@ -60,29 +57,11 @@ public class BaseBlock : MonoBehaviour
         return faceList.Contains((int)face);
     }
 
-    public void TurnOnRigidbody()
-    {
-        rb.isKinematic = false;
-    }
-
-    public void TurnOffRigidbody()
-    {
-        rb.isKinematic = true;
-    }
-
     private void FixedUpdate()
     {
         if (DragSource != null)
         {
-            rb.position = DragSource.transform.position;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out AttachmentPoint newPoint))
-        {
-            CurrentAttPoint = newPoint;
+            rbCache.rb.position = DragSource.transform.position;
         }
     }
 }

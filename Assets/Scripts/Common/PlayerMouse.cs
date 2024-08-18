@@ -11,6 +11,7 @@ public class PlayerMouse : MonoBehaviour
     public Camera Camera;
 
     private BaseBlock ObjectGrabbed;
+    [SerializeField] private LayerMask attachmentPointLayer;
 
     private bool clickInput;
     private bool canRotate = true;
@@ -20,7 +21,6 @@ public class PlayerMouse : MonoBehaviour
         clickInput = Input.GetMouseButton(0);
 
         transform.position = Camera.ScreenToWorldPoint(Input.mousePosition);
-        Player.grabbedBlock = ObjectGrabbed;
 
         if (ObjectGrabbed != null)
         {
@@ -36,9 +36,34 @@ public class PlayerMouse : MonoBehaviour
             // Dropping the currently-held ball
             if (!clickInput)
             {
+
+                { //Get Closest Attachment point
+
+                    Collider2D objectCollider = ObjectGrabbed.GetComponent<Collider2D>();
+
+                    RaycastHit2D hitCollider = Physics2D.BoxCast(
+                                            objectCollider.bounds.center, 
+                                            objectCollider.bounds.size, 
+                                            0, 
+                                            Vector2.up, 
+                                            10, 
+                                            attachmentPointLayer);
+
+                    if (hitCollider.collider != null)
+                    {
+                        AttachmentPoint attch = hitCollider.collider.GetComponentInParent<AttachmentPoint>();
+                        Debug.Log(attch);
+                        ObjectGrabbed.CurrentAttPoint = attch;
+                    }
+                    else 
+                    {
+                        ObjectGrabbed.CurrentAttPoint = null;
+                    }
+                }
+
                 if (ObjectGrabbed.CurrentAttPoint != null)
                 {
-                    Player.LockInBlockAnimation(ObjectGrabbed.CurrentAttPoint);
+                    Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
                 }
                 ObjectGrabbed.DragSource = null;
                 ObjectGrabbed = null;
@@ -57,9 +82,7 @@ public class PlayerMouse : MonoBehaviour
                     BaseBlock blockComp = collision.gameObject.GetComponent<BaseBlock>();
                     ObjectGrabbed = blockComp;
 
-                    Player.TryDetachBlock(blockComp);
                     blockComp.DragSource = transform;
-                    blockComp.TurnOnRigidbody();
                 }
             }
         }

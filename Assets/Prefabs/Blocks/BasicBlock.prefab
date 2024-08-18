@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6108920913723654990}
   - component: {fileID: 5903994709690841305}
   - component: {fileID: 953922837132183001}
+  - component: {fileID: 4905168587830563546}
   m_Layer: 8
   m_Name: BasicBlock
   m_TagString: Block
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   AttachedToItem: 0
+  rbCache: {fileID: 4905168587830563546}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
 --- !u!212 &6108920913723654990
@@ -175,3 +177,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4905168587830563546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169585781671383717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694edd802ee349447a411686a8bfc556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetCacheOnRespawn: 1
+  rb: {fileID: 0}
