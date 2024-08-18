@@ -38,9 +38,9 @@ public class Zone : MonoBehaviour
 
     private void Awake()
     {
-        BoxCollider[] boxes = GetComponents<BoxCollider>();
+        BoxCollider2D[] boxes = GetComponents<BoxCollider2D>();
         
-        foreach (BoxCollider box in boxes) 
+        foreach (BoxCollider2D box in boxes) 
         {
             box.isTrigger = true;
         }
@@ -111,6 +111,23 @@ public class Zone : MonoBehaviour
 
     }
 
+    [ContextMenu("Populate Zone Items From Children")]
+    private void PopulateZoneItemsFromChildren() 
+    {
+        ZoneItem[] items = GetComponentsInChildren<ZoneItem>();
+        List<ZoneItem> existingItems = new List<ZoneItem>(zoneItems);
+
+
+        foreach(ZoneItem item in items) 
+        {
+            if (!existingItems.Contains(item)) 
+            {
+                existingItems.Add(item);
+            }
+        }
+
+        zoneItems = existingItems.ToArray();
+    }
 
 
 
