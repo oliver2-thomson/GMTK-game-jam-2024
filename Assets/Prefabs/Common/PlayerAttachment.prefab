@@ -124,10 +124,6 @@ MonoBehaviour:
   tileParent: {fileID: 3403060740656222872}
   trigger: {fileID: 6869574219658404743}
   _camera: {fileID: 0}
-  pickupCube: {fileID: 0}
-  pickupRotateSpeed: 0.61
-  pickupForce: 500
-  dragForForce: 0
 --- !u!50 &2994742638775940309
 Rigidbody2D:
   serializedVersion: 4
@@ -150,7 +146,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -256,7 +252,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +277,11 @@ GameObject:
   - component: {fileID: 5744714706858850411}
   - component: {fileID: 5296748890485445185}
   - component: {fileID: 8391501392756666123}
+  - component: {fileID: 4305985344217874238}
   - component: {fileID: 4076381279211372487}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Brain
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   AttachedToItem: 0
+  rbCache: {fileID: 0}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
 --- !u!212 &8391501392756666123
@@ -372,6 +370,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &4305985344217874238
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042303021683121055}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &4076381279211372487
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -533,6 +558,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4386212789301935304}
     m_Modifications:
+    - target: {fileID: 4214801362440117590, guid: 0c3b094927ed7fa44b4cb3bf1d82619b,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 4472533381094095673}
+    - target: {fileID: 4214801362440117590, guid: 0c3b094927ed7fa44b4cb3bf1d82619b,
+        type: 3}
+      propertyPath: attachmentPointLayer.m_Bits
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 4279344090729211532, guid: 0c3b094927ed7fa44b4cb3bf1d82619b,
         type: 3}
       propertyPath: m_LocalPosition.x
