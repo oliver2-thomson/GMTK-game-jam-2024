@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
         VerticalMovement();
 
         // Final velocity update
+        //TO DO SET VELOCITY TO ADD FORCE
+        //COULD DO THIS BY FINDING DIFFERENCE AND CLAMPING IT TO POSITIVE VALUES
         rb.velocity = currentVelocity;
     }
 
