@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class BrainBlock : BaseBlock
 {
+    public Vector2Int localGridPosition;
 }

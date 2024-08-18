@@ -222,19 +222,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Deactive the block colliders that are right above the player
-        foreach (BoxCollider2D block in blockChildren)
-        {
-            if (lowestBlocks.Contains(block))
-            {
-                block.attachedRigidbody.simulated = false;
-            }
-            else
-            {
-                block.attachedRigidbody.simulated = true;
-            }
-        }
-
         // Then, find the middle point of those for the new x position
         float totalX = 0f;
         foreach (BoxCollider2D block in lowestBlocks)

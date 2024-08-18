@@ -12,6 +12,7 @@ public class PlayerMouse : MonoBehaviour
 
     private BaseBlock ObjectGrabbed;
     [SerializeField] private LayerMask attachmentPointLayer;
+    [SerializeField] private LineRenderer lineRender;
 
     private bool clickInput;
     private bool canRotate = true;
@@ -30,8 +31,15 @@ public class PlayerMouse : MonoBehaviour
 
         transform.position = Camera.ScreenToWorldPoint(Input.mousePosition);
 
+        //Update Line Renderer
+        if (lineRender != null)
+        {
+            lineRender.gameObject.SetActive(ObjectGrabbed != null);
+        }
+
         if (ObjectGrabbed != null)
         {
+
             // Rotating the ball
             if (canRotate)
             {
@@ -89,6 +97,14 @@ public class PlayerMouse : MonoBehaviour
                 {
                     BaseBlock blockComp = collision.gameObject.GetComponent<BaseBlock>();
                     ObjectGrabbed = blockComp;
+
+                    if (blockComp.AttachedToItem) 
+                    {
+                        if (!Player.TryDetachBlock(blockComp)) 
+                        {
+                            return;
+                        }    
+                    }
 
                     blockComp.DragSource = transform;
                 }
