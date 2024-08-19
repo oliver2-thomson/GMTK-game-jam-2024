@@ -94,6 +94,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1229669535963649170}
   m_SourcePrefab: {fileID: 100100000, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
+--- !u!114 &4492025755895706154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4905168587830563546, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8810247548760105200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655412885429744213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694edd802ee349447a411686a8bfc556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8655412885429744213 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
@@ -129,7 +141,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -147,11 +159,9 @@ PolygonCollider2D:
     - - {x: 0.09375, y: 0.25}
       - {x: -0.03125, y: 0.25}
       - {x: -0.15625, y: 0.1875}
-      - {x: -0.4375, y: -0.3125}
       - {x: -0.4375, y: -0.5}
       - {x: 0.4375, y: -0.5}
       - {x: 0.4375, y: -0.40625}
-      - {x: 0.375, y: -0.1875}
   m_UseDelaunayMesh: 0
 --- !u!114 &1229669535963649170
 MonoBehaviour:
@@ -165,3 +175,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4585479ede3e56d4fafedc14fe616919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enumType: 4
+  MaxHealth: 2.4
+  DragSpeed: 10
+  material: 0
+  AttachedToItem: 0
+  rbCache: {fileID: 4492025755895706154}
+  DragSource: {fileID: 0}
+  CurrentAttPoint: {fileID: 0}
+  player: {fileID: 0}
+  offsetTowardsCenter: {x: 0, y: 0}
+  damage: 1.5
+  VelocityBased: 1
+  velocityScale: 0.1
