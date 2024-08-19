@@ -8,10 +8,17 @@ public class Cannon : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectilePower;
     private List<GameObject> projectiles = new List<GameObject>();
+    public float fireRate = 2;
+    private float cooldownProgress = 0;
 
     // Update is called once per frame
     void Update()
     {
+        if (cooldownProgress < fireRate)
+        {
+            cooldownProgress += Time.deltaTime;
+        }
+
         if (target != null)
         {
             Vector3 displacement = target.transform.position - transform.position;
@@ -20,6 +27,12 @@ public class Cannon : MonoBehaviour
 
             float angle = Mathf.Atan2(yDelta, xDelta) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle);
+
+            if (cooldownProgress >= fireRate)
+            {
+                cooldownProgress -= fireRate;
+                Fire();
+            }
         }
     }
 

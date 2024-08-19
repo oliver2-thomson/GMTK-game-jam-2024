@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CannonBlock : BaseBlock
 {
+    public Cannon cannon = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,14 @@ public class CannonBlock : BaseBlock
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            cannon.setTarget(enemy.gameObject);
+        }
     }
 }
