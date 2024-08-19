@@ -143,7 +143,13 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
-    public void SelectButton()
+    public void ManualSwitchMenuOption(int newOption)
+    {
+        selectedMenuOption = newOption;
+        OptionsHighlight.position = new Vector2(OptionsHighlight.position.x, OptionsButtons[selectedMenuOption].transform.position.y);
+    }
+
+        public void SelectButton()
     {
         switch (currentMenuState)
         {

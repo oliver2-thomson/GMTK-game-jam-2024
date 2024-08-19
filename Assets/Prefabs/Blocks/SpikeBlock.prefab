@@ -63,6 +63,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.74
+      objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Sprite
@@ -175,16 +190,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4585479ede3e56d4fafedc14fe616919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: 4
-  MaxHealth: 2.4
-  DragSpeed: 4
   material: 0
+  MaxHealth: 2.4
+  enumType: 4
+  DragSpeed: 4
   AttachedToItem: 0
   rbCache: {fileID: 4492025755895706154}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}
   offsetTowardsCenter: {x: 0, y: 0}
-  damage: 1.5
+  damage: 1.12
   VelocityBased: 1
-  velocityScale: 0.1
+  velocityScale: 0.04
