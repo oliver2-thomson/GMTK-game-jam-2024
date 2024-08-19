@@ -5,18 +5,18 @@ using UnityEngine;
 public class ZoneAmb : ZoneItem
 {
     [Header("Zone Ambience Use this for Music/3D Sound")]
-    [SerializeField] AudioClip zoneAudio;
+    [SerializeField] public AudioClip zoneAudio;
     
     [Space]
-    [SerializeField] float fadeInTime = 0;
-    [SerializeField] float fadeOutTime = 0;
+    [SerializeField] public float fadeInTime = 0;
+    [SerializeField] public float fadeOutTime = 0;
     
     [Space]
     
-    [SerializeField] bool isLooping = false;
+    [SerializeField] public bool isLooping = false;
 
     [Range(0,1)]
-    [SerializeField] float volume = 0.5f;
+    [SerializeField] public float volume = 0.5f;
 
     [Range(0,1)]
     [SerializeField] float spatialBlend = 0;
@@ -25,7 +25,6 @@ public class ZoneAmb : ZoneItem
     private void Awake()
     {
         audioSource = this.gameObject.AddComponent<AudioSource>();
-        audioSource.clip = zoneAudio;
         audioSource.volume = volume;
         audioSource.spatialBlend = spatialBlend;
         audioSource.loop = isLooping;
@@ -40,6 +39,7 @@ public class ZoneAmb : ZoneItem
     {
         if (!audioSource.isPlaying)
         {
+            audioSource.clip = zoneAudio;
             audioSource.Play();
             if (fadeInTime > 0)
             {
@@ -67,6 +67,7 @@ public class ZoneAmb : ZoneItem
         if (targetVolume == 0) 
         {
             audioSource.Stop();
+            audioSource.clip = null;
         }
 
         yield break;
