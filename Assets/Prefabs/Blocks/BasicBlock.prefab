@@ -50,11 +50,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   MaxHealth: 0
+  DragSpeed: 10
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 4905168587830563546}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
+  player: {fileID: 0}
 --- !u!212 &6108920913723654990
 SpriteRenderer:
   m_ObjectHideFlags: 0
