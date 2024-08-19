@@ -5,6 +5,11 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     // Special camera movements are handled here, when the player walks into a camera-locked area
+    public static CameraController instance;
+    private void Awake()
+    {
+        instance = this;    
+    }
 
     public Transform Target;
     [Space(10)]

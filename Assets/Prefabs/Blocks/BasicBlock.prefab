@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 19743243607256707}
   - component: {fileID: 5516224469016222755}
   - component: {fileID: 6108920913723654990}
+  - component: {fileID: 5903994709690841305}
   - component: {fileID: 953922837132183001}
+  - component: {fileID: 4905168587830563546}
   m_Layer: 8
   m_Name: BasicBlock
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +49,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enumType: -1
-  blockWidth: 0
-  blockHeight: 0
+  MaxHealth: 0
+  DragSpeed: 10
+  material: 0
+  AttachedToItem: 0
+  rbCache: {fileID: 4905168587830563546}
+  DragSource: {fileID: 0}
+  CurrentAttPoint: {fileID: 0}
+  player: {fileID: 0}
 --- !u!212 &6108920913723654990
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,7 +98,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 577aa7f28969a1242929c8f11bcae79f, type: 3}
   m_Color: {r: 1, g: 0.8447487, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +109,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &5903994709690841305
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169585781671383717}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1.18
+  m_AngularDrag: 1.12
+  m_GravityScale: 0.03
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &953922837132183001
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,12 +172,26 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.95, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &4905168587830563546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169585781671383717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694edd802ee349447a411686a8bfc556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetCacheOnRespawn: 1
+  rb: {fileID: 0}
