@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerCannon : BaseBlock
 {
-    public override void OnToggleTile(bool isToggled)
+    bool isToggled = false;
+    public override void OnToggleTile()
     {
         isToggled = !isToggled;
-        base.OnToggleTile(isToggled);
     }
 
 }

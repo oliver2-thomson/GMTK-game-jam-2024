@@ -350,7 +350,7 @@ public partial class PlayerAttachment : MonoBehaviour
         {
             if (block != null) 
             {
-                block.OnToggleTile(isToggled);
+                block.OnToggleTile();
             }
         }
     }
