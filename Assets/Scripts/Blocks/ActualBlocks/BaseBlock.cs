@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BaseBlock : MonoBehaviour
+public class BaseBlock : Damageable
 {
     [System.Flags]
     public enum FaceType
@@ -14,22 +14,11 @@ public class BaseBlock : MonoBehaviour
         Left = 3
     }
 
-    public enum ImpactMaterial
-    {
-        Metal = 0,
-        Wood = 1,
-        Dirt = 2,
-        Blood = 3,
-        Stone = 4
-    }
-
     [EnumFlagsAttributes]
     [Tooltip("Select what faces are attachable from this")]
 
     [SerializeField] private FaceType enumType;
-    [SerializeField] private float MaxHealth;
     [SerializeField] private float DragSpeed;
-    [SerializeField] private ImpactMaterial material; 
 
     public bool AttachedToItem = false;
     [Space(10)]
@@ -40,51 +29,16 @@ public class BaseBlock : MonoBehaviour
     [HideInInspector] public AttachmentPoint CurrentAttPoint;
     [HideInInspector] public PlayerAttachment player;
     
-    public float _Health 
+    public override void Awake()
     {
-        get 
-        {
-            return currentHealth;
-        }
-        set 
-        {
-            if (value > MaxHealth)
-            {
-                currentHealth = MaxHealth;
-            }
-            else if (value < 0) 
-            {
-                currentHealth = 0;
-                OnDeath();
-            }
-            else 
-            {
-                currentHealth = value;
-            }
-        }
-    }
-
-    private float currentHealth;
-
-    private void Awake()
-    {
+        base.Awake();
         if (AttachedToItem)
         {
             //If attached at boot try and get player.
             //Can technically fail if attached to anything that isn't the player
             player = GetComponentInParent<PlayerAttachment>();
         }
-        currentHealth = MaxHealth;
-    }
-
-    public void DamageAtPoint(Vector2 point, float damage) 
-    {
-        ImpactPropertiesManager.instance.PlayImpactPropertyAtPoint(material, point);
-        DamageBlock(damage);
-    }
-    public void DamageBlock(float damage) 
-    {
-        _Health -= damage;
+        
     }
 
     public List<int> ReturnAllFaceElements()
@@ -101,6 +55,11 @@ public class BaseBlock : MonoBehaviour
 
         return selectedElements;
     }
+
+    public virtual void OnAttachBlock() 
+    { 
+        
+    }
     public virtual void OnUseTile() 
     {
         
@@ -112,7 +71,7 @@ public class BaseBlock : MonoBehaviour
     }
 
     [ContextMenu("Destroy Block")]
-    public virtual void OnDeath() 
+    public override void OnDeath() 
     {
         player?.ForceDetachBlock(this);
         GameObject.Destroy(this.gameObject);

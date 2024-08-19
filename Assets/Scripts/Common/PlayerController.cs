@@ -20,6 +20,14 @@ public class PlayerController : MonoBehaviour
     public float JumpSpeed;
     public float MaxJumpTime;
 
+    public float Horizonantal 
+    {
+        get 
+        {
+            return (leftInput ? -1 : rightInput ? 1 : 0);
+        }
+    }
+
     // Private variables
     private bool leftInput;
     private bool rightInput;
@@ -29,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private float currentJumpTimer;
 
     // Component references
-    private Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     private BoxCollider2D col;
     private CompositeCollider2D compCol;
     private PlayerAttachment playerAttacher;
@@ -81,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        float targetSpeed = MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0);
+        float targetSpeed = MoveSpeed * Horizonantal;
         float speedDifference = targetSpeed - rb.velocity.x;
         float accelRate = isGrounded ? MoveAccel : MoveMidairAccel;
         float force = speedDifference * accelRate;
