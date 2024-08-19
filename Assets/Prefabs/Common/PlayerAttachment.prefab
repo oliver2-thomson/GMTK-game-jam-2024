@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1935776444270762874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -293,14 +293,14 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 1
-  m_GravityScale: 0
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -317,12 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 6
-  MoveAccel: 1
-  MoveMidairAccel: 0.3
+  MoveSpeed: 7
+  MoveAccel: 6
+  MoveMidairAccel: 2
   JumpSpeed: 8
-  MaxJumpTime: 0.2
-  Gravity: 0.4
+  MaxJumpTime: 0.3
+  StackBasedSpeedBoost: 0.5
 --- !u!212 &6188146802559388459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -469,8 +469,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   MaxHealth: 0
+  DragSpeed: 0
   material: 0
-  AttachedToItem: 0
+  AttachedToItem: 1
   rbCache: {fileID: 0}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
