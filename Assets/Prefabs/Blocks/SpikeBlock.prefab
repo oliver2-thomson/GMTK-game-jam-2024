@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &9071812999491547198
+--- !u!1001 &8810247548760105200
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -31,17 +31,17 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -61,23 +61,13 @@ PrefabInstance:
     - target: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Name
-      value: MirrorBlock
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
-        type: 3}
-      propertyPath: material
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
-        type: 3}
-      propertyPath: MaxHealth
-      value: 0.4
+      value: SpikeBlock
       objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9954707a22d374c4ba250d273b5f2e6a,
+      objectReference: {fileID: 21300000, guid: facf3bb1805c6a64ab8b0a6d84eb51e9,
         type: 3}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -89,57 +79,112 @@ PrefabInstance:
       propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
+    - {fileID: 953922837132183001, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5239541399312021100}
+      addedObject: {fileID: 551704217547483222}
+    - targetCorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1229669535963649170}
   m_SourcePrefab: {fileID: 100100000, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
---- !u!114 &4176847914196099812 stripped
+--- !u!114 &4492025755895706154 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4905168587830563546, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
     type: 3}
-  m_PrefabInstance: {fileID: 9071812999491547198}
+  m_PrefabInstance: {fileID: 8810247548760105200}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9205340619336852123}
+  m_GameObject: {fileID: 8655412885429744213}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 694edd802ee349447a411686a8bfc556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &9205340619336852123 stripped
+--- !u!1 &8655412885429744213 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
     type: 3}
-  m_PrefabInstance: {fileID: 9071812999491547198}
+  m_PrefabInstance: {fileID: 8810247548760105200}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5239541399312021100
+--- !u!60 &551704217547483222
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655412885429744213}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.09375, y: 0.25}
+      - {x: -0.03125, y: 0.25}
+      - {x: -0.15625, y: 0.1875}
+      - {x: -0.4375, y: -0.5}
+      - {x: 0.4375, y: -0.5}
+      - {x: 0.4375, y: -0.40625}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1229669535963649170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9205340619336852123}
+  m_GameObject: {fileID: 8655412885429744213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ede3624d9058b49b0d9562f28b3e57, type: 3}
+  m_Script: {fileID: 11500000, guid: 4585479ede3e56d4fafedc14fe616919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: -1
-  MaxHealth: 0.4
-  DragSpeed: 26.65
-  material: 4
+  enumType: 4
+  MaxHealth: 2.4
+  DragSpeed: 10
+  material: 0
   AttachedToItem: 0
-  rbCache: {fileID: 4176847914196099812}
+  rbCache: {fileID: 4492025755895706154}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}
+  offsetTowardsCenter: {x: 0, y: 0}
+  damage: 1.5
+  VelocityBased: 1
+  velocityScale: 0.1

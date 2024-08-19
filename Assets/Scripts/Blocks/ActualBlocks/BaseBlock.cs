@@ -28,6 +28,7 @@ public class BaseBlock : MonoBehaviour
 
     [SerializeField] private FaceType enumType;
     [SerializeField] private float MaxHealth;
+    [SerializeField] private float DragSpeed;
     [SerializeField] private ImpactMaterial material; 
 
     public bool AttachedToItem = false;
@@ -129,11 +130,17 @@ public class BaseBlock : MonoBehaviour
         return faceList.Contains((int)face);
     }
 
+    public bool CheckObjectIsntAttached(Transform transform) 
+    {
+        Rigidbody2D rb = transform.GetComponentInParent<Rigidbody2D>();
+        return this.transform.IsChildOf(rb.transform);
+    }
+
     private void FixedUpdate()
     {
         if (DragSource != null)
         {
-            rbCache.rb.position = DragSource.transform.position;
+            rbCache.rb.velocity = (((Vector2)DragSource.transform.position - rbCache.rb.position) / 2) * DragSpeed;
         }
     }
 }
