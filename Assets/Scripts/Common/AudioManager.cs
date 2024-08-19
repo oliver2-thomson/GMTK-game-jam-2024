@@ -19,6 +19,11 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (AudioManager.instance != null) 
+        {
+            this.enabled = false;
+            return;
+        }
         DontDestroyOnLoad(this);
         instance = this;
 

@@ -83,7 +83,7 @@ public class PlayerMouse : MonoBehaviour
 
                     if (ObjectGrabbed.CurrentAttPoint != null)
                     {
-                        Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
+                               Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
                     }
                     ObjectGrabbed.DragSource = null;
                     ObjectGrabbed = null;

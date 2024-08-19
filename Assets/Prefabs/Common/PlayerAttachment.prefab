@@ -293,7 +293,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 1
-  m_GravityScale: 0
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -318,11 +318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 6
-  MoveAccel: 1
-  MoveMidairAccel: 0.3
+  MoveAccel: 5
+  MoveMidairAccel: 2
   JumpSpeed: 8
-  MaxJumpTime: 0.2
-  Gravity: 0.4
+  MaxJumpTime: 0.3
 --- !u!212 &6188146802559388459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -469,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   MaxHealth: 0
+  DragSpeed: 0
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 0}

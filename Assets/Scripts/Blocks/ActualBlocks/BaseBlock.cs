@@ -133,7 +133,7 @@ public class BaseBlock : MonoBehaviour
     public bool CheckObjectIsntAttached(Transform transform) 
     {
         Rigidbody2D rb = transform.GetComponentInParent<Rigidbody2D>();
-        return this.transform.IsChildOf(rb.transform);
+        return this.transform.IsChildOf(rb.transform) || rb.transform.IsChildOf(this.transform);
     }
 
     private void FixedUpdate()

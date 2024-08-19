@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb73bf496152e3242a34e7d55e539118, type: 3}
+  m_Name: Boing
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: d86003abc8765eb4e9fefd3275725e24, type: 3}
+  - {fileID: 8300000, guid: 122722f9e19eff14ea53a1510d98613c, type: 3}
+  - {fileID: 8300000, guid: 2dd04f4c47374b6418eba74b6cde037d, type: 3}
+  - {fileID: 8300000, guid: 1e2c34397b5c69841b4dbb999e24168a, type: 3}

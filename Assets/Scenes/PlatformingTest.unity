@@ -1235,16 +1235,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2994742638775940309, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4319939646362943978, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4386212789301935304, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1295,35 +1285,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4472533381094095673, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 1555523163}
-    - target: {fileID: 4884076795123171635, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: Camera
-      value: 
-      objectReference: {fileID: 1555523163}
     - target: {fileID: 5689143433927221474, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
         type: 3}
       propertyPath: m_Name
       value: Player2.0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8082693411845135247, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: MoveAccel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8082693411845135247, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: MaxJumpTime
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8082693411845135247, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
-        type: 3}
-      propertyPath: MoveMidairAccel
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
