@@ -204,12 +204,12 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.914
+      value: -9.519299
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.272
+      value: 2.9719136
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -274,6 +274,11 @@ PrefabInstance:
     - target: {fileID: 953922837132183001, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_GravityScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
@@ -362,11 +367,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: 0
   MaxHealth: 0
+  DragSpeed: 0
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 1923573733977914345}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
+  player: {fileID: 0}
   windTrigger: {fileID: 2254581647391373895}
   backForce: 520
   playerForce: 120
