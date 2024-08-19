@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public float JumpSpeed;
     public float MaxJumpTime;
+    public float StackSpeedBoost;
 
     public float Horizonantal 
     {
