@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Physics2D.queriesHitTriggers = false;
         instance = this;
         if (Camera == null) 
         {
