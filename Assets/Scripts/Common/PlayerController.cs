@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float JumpSpeed;
     public float MaxJumpTime;
 
-    public float StackBasedSpeedBoost;
+    public float StackSpeedBoost;
 
     // Private variables
     private bool leftInput;
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
 
         blockNum = playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>().Length;
-        speedBoostForce = (blockNum * StackBasedSpeedBoost);
+        speedBoostForce = (blockNum * StackSpeedBoost);
     }
 
     private void FixedUpdate()
