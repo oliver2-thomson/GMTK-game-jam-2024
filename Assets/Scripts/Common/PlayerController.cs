@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         }
 
         blockNum = playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>().Length;
-        speedBoostForce = (blockNum * StackBasedSpeedBoost);
+        speedBoostForce = (blockNum * StackSpeedBoost);
     }
 
     private void FixedUpdate()
