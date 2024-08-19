@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    public GameObject target;
+    public GameObject target = null;
     public GameObject projectilePrefab;
     public float projectilePower;
     private List<GameObject> projectiles = new List<GameObject>();
@@ -12,12 +12,15 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 displacement = target.transform.position - transform.position;
-        float xDelta = displacement.x;
-        float yDelta = displacement.y;
+        if (target != null)
+        {
+            Vector3 displacement = target.transform.position - transform.position;
+            float xDelta = displacement.x;
+            float yDelta = displacement.y;
 
-        float angle = Mathf.Atan2(yDelta, xDelta) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3(0, 0, angle);
+            float angle = Mathf.Atan2(yDelta, xDelta) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, 0, angle);
+        }
     }
 
     [ContextMenu("Fire")]
