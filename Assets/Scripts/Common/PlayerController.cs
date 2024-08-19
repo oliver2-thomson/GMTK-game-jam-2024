@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -18,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
     public float JumpSpeed;
     public float MaxJumpTime;
-    public float Gravity;
 
     // Private variables
     private bool leftInput;
@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private float currentJumpTimer;
-    private Vector2 currentVelocity;
 
     // Component references
     private Rigidbody2D rb;
@@ -78,23 +77,17 @@ public class PlayerController : MonoBehaviour
         CeilingCheck();
 
         VerticalMovement();
-
-        // Final velocity update
-        //TO DO SET VELOCITY TO ADD FORCE
-        //COULD DO THIS BY FINDING DIFFERENCE AND CLAMPING IT TO POSITIVE VALUES
-        rb.velocity = currentVelocity;
     }
 
     private void HorizontalMovement()
     {
-        if (isGrounded)
-        {
-            currentVelocity.x = Mathf.MoveTowards(rb.velocity.x, MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0), MoveAccel);
-        }
-        else
-        {
-            currentVelocity.x = Mathf.MoveTowards(rb.velocity.x, MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0), MoveMidairAccel);
-        }
+        float targetSpeed = MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0);
+        float speedDifference = targetSpeed - rb.velocity.x;
+        float accelRate = isGrounded ? MoveAccel : MoveMidairAccel;
+        float force = speedDifference * accelRate;
+
+        // Apply the horizontal force
+        rb.AddForce(new Vector2(force, 0), ForceMode2D.Force);
     }
 
     private void VerticalMovement()
@@ -102,53 +95,79 @@ public class PlayerController : MonoBehaviour
         // Jumping logic
         if (!isGrounded)
         {
-            // Keep applying vertical velocity if the jump button gets held down
             if (jumpInput && currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
             {
-                currentVelocity.y = JumpSpeed;
+                rb.AddForce(new Vector2(0, JumpSpeed - rb.velocity.y), ForceMode2D.Impulse);
             }
             else
             {
-                // Falling down if there is no jump input
-                currentVelocity.y -= Gravity;
+                rb.AddForce(new Vector2(0, -rb.gravityScale), ForceMode2D.Force);
             }
         }
         else
         {
-            currentVelocity.y = 0;
             if (jumpInput)
             {
                 isGrounded = false;
-                currentVelocity.y = JumpSpeed;
+                rb.AddForce(new Vector2(0, JumpSpeed), ForceMode2D.Impulse);
             }
         }
     }
 
+    private List<BoxCollider2D> GetRelevantColliderObjects()
+    {
+        List<BoxCollider2D> colCheckObjects = playerAttacher.tileParent.GetComponentsInChildren<BoxCollider2D>().ToList();
+
+        // Only check colliders which are for the blocks themselves
+        for (int i = colCheckObjects.Count - 1; i >= 0; i--)
+        {
+            if (colCheckObjects[i].GetComponent<BaseBlock>() == null)
+            {
+                colCheckObjects.Remove(colCheckObjects[i]);
+            }
+        }
+
+        colCheckObjects.Add(col);
+        return colCheckObjects;
+    }
+
     private void GroundCheck()
     {
-        if (rb.velocity.y <= 0)
+        if (Mathf.Floor(rb.velocity.y * 10) / 10 <= 0)
         {
-            RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
+            List<BoxCollider2D> colCheckObjects = GetRelevantColliderObjects();
 
-            foreach (RaycastHit2D hit in groundCheck)
+            foreach (BoxCollider2D block in colCheckObjects)
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                bool colCheckFinished = false;
+
+                RaycastHit2D[] groundCheck = Physics2D.BoxCastAll(block.transform.position, block.size, Mathf.Round(transform.eulerAngles.z), Vector2.down);
+
+                foreach (RaycastHit2D hit in groundCheck)
                 {
-                    if (hit.normal == Vector2.up)
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
-                        if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                        if (hit.normal == Vector2.up)
                         {
-                            rb.position = new Vector2(rb.position.x, hit.point.y + (col.size.y / 2) - col.offset.y);
-                            isGrounded = true;
-                            currentJumpTimer = 0;
-                            break;
-                        }
-                        else
-                        {
-                            isGrounded = false;
-                            break;
+                            if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                            {
+                                isGrounded = true;
+                                currentJumpTimer = 0;
+                                colCheckFinished = true;
+                                break;
+                            }
+                            else
+                            {
+                                isGrounded = false;
+                                break;
+                            }
                         }
                     }
+                }
+
+                if (colCheckFinished)
+                {
+                    break;
                 }
             }
         }
@@ -158,18 +177,30 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.y > 0)
         {
-            RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(rb.position, col.size, Mathf.Round(transform.eulerAngles.z), Vector2.up);
-            foreach (RaycastHit2D hit in ceilingCheck)
+            List<BoxCollider2D> colCheckObjects = GetRelevantColliderObjects();
+
+            foreach (BoxCollider2D block in colCheckObjects)
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                bool colCheckFinished = false;
+
+                RaycastHit2D[] ceilingCheck = Physics2D.BoxCastAll(block.transform.position, block.size, Mathf.Round(transform.eulerAngles.z), Vector2.up);
+                foreach (RaycastHit2D hit in ceilingCheck)
                 {
-                    if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.down)
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
-                        rb.position = new Vector2(rb.position.x, hit.point.y - col.size.y / 2 - 0.1f);
-                        currentJumpTimer = MaxJumpTime;
-                        currentVelocity.y = -Gravity;
-                        break;
+                        if (Mathf.Floor(hit.distance * 10) / 10 <= 0 && hit.normal == Vector2.down)
+                        {
+                            currentJumpTimer = MaxJumpTime;
+                            rb.AddForce(new Vector2(rb.velocity.x, -rb.gravityScale), ForceMode2D.Force);
+                            colCheckFinished = true;
+                            break;
+                        }
                     }
+                }
+
+                if (colCheckFinished)
+                {
+                    break;
                 }
             }
         }
@@ -178,6 +209,14 @@ public class PlayerController : MonoBehaviour
     public void FindBottomMostPoint()
     {
         List<BoxCollider2D> blockChildren = playerAttacher.tileParent.GetComponentsInChildren<BoxCollider2D>().ToList();
+        // Only check colliders which are for the blocks themselves
+        for (int i = blockChildren.Count - 1; i >= 0; i--)
+        {
+            if (blockChildren[i].GetComponent<BaseBlock>() == null)
+            {
+                blockChildren.Remove(blockChildren[i]);
+            }
+        }
 
         // First, find the blocks which are at the bottom of the "stack", for the new y position
         float lowestY = Mathf.Infinity;
@@ -210,16 +249,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        /* Deactive the block colliders that are right above the player
-        foreach (BoxCollider2D block in blockChildren)
-        {
-            if (lowestBlocks.Contains(block))
-            {
-                Physics2D.IgnoreCollision(block, col);
-                Debug.Log(block);
-            }
-        }*/
-
         // Then, find the middle point of those for the new x position
         float totalLowestX = 0f;
         foreach (BoxCollider2D block in lowestBlocks)
@@ -231,28 +260,5 @@ public class PlayerController : MonoBehaviour
         // Move all of the blocks by how much the player would be moving
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
         playerAttacher.tileParent.localPosition += (Vector3)(rb.position - playerNewPos);
-
-
-        // (Still WIP) Stretching the player's collider width to get smooth climbing with bulkier builds
-        List<float> blockXpositions = new List<float>();
-        foreach (BoxCollider2D block in blockChildren)
-        {
-            blockXpositions.Add(block.transform.position.x);
-        }
-        blockXpositions.Sort();
-
-        col.size = new Vector2(
-            (blockXpositions[blockXpositions.Count - 1] - blockXpositions[0]) + blockChildren[0].size.x,
-            col.size.y);
-
-        // Adjusting player collider offset for the new size
-        if (blockXpositions[0] <= rb.position.x - (col.size.x / 2))
-        {
-            col.offset -= new Vector2(blockChildren[0].size.x / 2, 0);
-        }
-        if (blockXpositions[blockXpositions.Count - 1] >= rb.position.x + (col.size.x / 2))
-        {
-            col.offset += new Vector2(blockChildren[0].size.x / 2, 0);
-        }
     }
 }
