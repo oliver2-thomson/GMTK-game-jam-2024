@@ -14,8 +14,9 @@ public class GameController : MonoBehaviour
     public bool IsPaused;
     [Space(10)]
     public Camera Camera;
-    public PlayerAttachment Player;
-    public PlayerController PlayerController;
+
+    private PlayerAttachment Player;
+    private PlayerController PlayerController;
 
     // Private variables
     private UIPauseScreen pauseUI;
@@ -29,6 +30,9 @@ public class GameController : MonoBehaviour
         {
             Camera = Camera.main;
         }
+
+        Player = FindObjectOfType<PlayerAttachment>();
+        PlayerController = Player.GetComponent<PlayerController>();
 
         pauseUI = FindObjectOfType<UIPauseScreen>();
         cameraData = Camera.GetUniversalAdditionalCameraData();

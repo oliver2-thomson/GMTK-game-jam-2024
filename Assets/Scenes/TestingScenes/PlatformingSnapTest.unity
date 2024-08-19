@@ -238,6 +238,7 @@ MonoBehaviour:
   IsPaused: 0
   Camera: {fileID: 769230595}
   Player: {fileID: 1917832636}
+  PlayerController: {fileID: 1917832644}
 --- !u!4 &494123135
 Transform:
   m_ObjectHideFlags: 0
@@ -947,6 +948,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8082693411845135247, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
+        type: 3}
+      propertyPath: InputEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8819870602808955162, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
         type: 3}
@@ -5610,6 +5616,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1132686472}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917832644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8082693411845135247, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1132686472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027418534
 GameObject:
   m_ObjectHideFlags: 0

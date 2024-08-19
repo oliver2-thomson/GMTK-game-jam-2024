@@ -317,13 +317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputEnabled: 0
+  InputEnabled: 1
   MoveSpeed: 7
   MoveAccel: 6
   MoveMidairAccel: 2
   JumpSpeed: 8
   MaxJumpTime: 0.3
   StackSpeedBoost: 0.5
+  rb: {fileID: 0}
 --- !u!212 &6188146802559388459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -468,10 +469,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2de871ba2f64647b097681130a72b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: -1
-  MaxHealth: 0
-  DragSpeed: 0
   material: 0
+  MaxHealth: 0
+  enumType: -1
+  DragSpeed: 0
   AttachedToItem: 1
   rbCache: {fileID: 0}
   DragSource: {fileID: 0}
