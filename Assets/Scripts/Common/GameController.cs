@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     [Space(10)]
     public Camera Camera;
     public PlayerAttachment Player;
+    public PlayerController PlayerController;
 
     // Private variables
     private UIPauseScreen pauseUI;
@@ -34,23 +35,26 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        // Switching between editing and playing modes
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (PlayerController.InputEnabled)
         {
-            IsEditingBlocks = true;
-            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeIn");
-            //cameraData.cameraStack[0].enabled = true;
+            // Switching between editing and playing modes
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                IsEditingBlocks = true;
+                cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeIn");
+                //cameraData.cameraStack[0].enabled = true;
 
-            Player.ShowAttachmentUI();
-        }
+                Player.ShowAttachmentUI();
+            }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            IsEditingBlocks = false;
-            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
-            //cameraData.cameraStack[0].enabled = false;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                IsEditingBlocks = false;
+                cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
+                //cameraData.cameraStack[0].enabled = false;
 
-            Player.HideUI();
+                Player.HideUI();
+            }
         }
         
         // Pausing
