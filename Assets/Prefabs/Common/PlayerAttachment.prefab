@@ -322,6 +322,7 @@ MonoBehaviour:
   MoveMidairAccel: 2
   JumpSpeed: 8
   MaxJumpTime: 0.3
+  rb: {fileID: 0}
 --- !u!212 &6188146802559388459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -466,10 +467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2de871ba2f64647b097681130a72b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: -1
-  MaxHealth: 0
-  DragSpeed: 0
   material: 0
+  MaxHealth: 0
+  enumType: -1
+  DragSpeed: 0
   AttachedToItem: 0
   rbCache: {fileID: 0}
   DragSource: {fileID: 0}
@@ -612,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &721391811739166958
 Transform:
   m_ObjectHideFlags: 0
