@@ -23,10 +23,18 @@ public class Cannon : MonoBehaviour
     [ContextMenu("Fire")]
     public void Fire()
     {
-        Vector3 displacement = target.transform.position - transform.position;
-        GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
-        rb.AddForce(displacement.normalized * projectilePower);
-        projectiles.Add(newProjectile);
+        if (target != null)
+        {
+            Vector3 displacement = target.transform.position - transform.position;
+            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
+            rb.AddForce(displacement.normalized * projectilePower);
+            projectiles.Add(newProjectile);
+        }
+    }
+
+    public void setTarget (GameObject newTarget)
+    {
+        target = newTarget;
     }
 }
