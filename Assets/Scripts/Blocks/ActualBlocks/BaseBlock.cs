@@ -28,6 +28,7 @@ public class BaseBlock : MonoBehaviour
 
     [SerializeField] private FaceType enumType;
     [SerializeField] private float MaxHealth;
+    [SerializeField] private float DragSpeed;
     [SerializeField] private ImpactMaterial material; 
 
     public bool AttachedToItem = false;
@@ -139,7 +140,7 @@ public class BaseBlock : MonoBehaviour
     {
         if (DragSource != null)
         {
-            rbCache.rb.position = DragSource.transform.position;
+            rbCache.rb.velocity = (((Vector2)DragSource.transform.position - rbCache.rb.position) / 2) * DragSpeed;
         }
     }
 }
