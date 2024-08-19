@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     // Public variables
     [Header("General Player Settings")]
+    public bool InputEnabled;
 
     [Space(10)]
     [Header("Physics Settings")]
@@ -54,22 +55,25 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Processing inputs
-        leftInput = Input.GetKey(KeyCode.A);
-        rightInput = Input.GetKey(KeyCode.D);
-        if (Input.GetKey(KeyCode.W))
+        if (InputEnabled)
         {
-            if (currentJumpTimer == 0)
+            leftInput = Input.GetKey(KeyCode.A);
+            rightInput = Input.GetKey(KeyCode.D);
+            if (Input.GetKey(KeyCode.W))
             {
-                jumpInput = true;
+                if (currentJumpTimer == 0)
+                {
+                    jumpInput = true;
+                }
+                if (!isGrounded)
+                {
+                    currentJumpTimer += Time.deltaTime;
+                }
             }
-            if (!isGrounded)
+            else
             {
-                currentJumpTimer += Time.deltaTime;
+                jumpInput = false;
             }
-        }
-        else
-        {
-            jumpInput = false;
         }
 
         blockNum = playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>().Length;
