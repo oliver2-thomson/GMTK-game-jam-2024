@@ -365,9 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103533d1efd0ffa459ff1e2aeb25b5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: 0
+  enumType: 4
   MaxHealth: 0
-  DragSpeed: 0
+  DragSpeed: 8
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 1923573733977914345}

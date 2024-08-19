@@ -130,6 +130,12 @@ public class BaseBlock : MonoBehaviour
         return faceList.Contains((int)face);
     }
 
+    public bool CheckObjectIsntAttached(Transform transform) 
+    {
+        Rigidbody2D rb = transform.GetComponentInParent<Rigidbody2D>();
+        return this.transform.IsChildOf(rb.transform);
+    }
+
     private void FixedUpdate()
     {
         if (DragSource != null)
