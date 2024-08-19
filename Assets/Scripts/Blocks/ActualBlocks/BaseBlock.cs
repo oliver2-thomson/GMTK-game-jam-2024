@@ -37,7 +37,8 @@ public class BaseBlock : MonoBehaviour
 
     [HideInInspector] public Transform DragSource;
     [HideInInspector] public AttachmentPoint CurrentAttPoint;
-
+    [HideInInspector] public PlayerAttachment player;
+    
     public float _Health 
     {
         get 
@@ -59,6 +60,15 @@ public class BaseBlock : MonoBehaviour
 
     private float currentHealth;
 
+    private void Awake()
+    {
+        if (AttachedToItem)
+        {
+            //If attached at boot try and get player.
+            //Can technically fail if attached to anything that isn't the player
+            player = GetComponentInParent<PlayerAttachment>();
+        }
+    }
 
     public void DamageAtPoint(Vector2 point) 
     {
@@ -87,6 +97,16 @@ public class BaseBlock : MonoBehaviour
     public void OnPlacedTile()
     {
         //Todo parse oriational data to block
+    }
+
+    public virtual void OnUseTile() 
+    {
+        
+    }
+
+    public virtual void OnToggleTile()
+    {
+
     }
 
 

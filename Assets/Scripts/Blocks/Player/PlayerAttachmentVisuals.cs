@@ -7,7 +7,6 @@ public partial class PlayerAttachment : MonoBehaviour
     [Space]
     [Header("Pickup Attributes")]
     [SerializeField] TriggerEvents2D trigger;
-    [SerializeField] private Camera _camera;
 
     private HashSet<BaseBlock> blocksCached = new HashSet<BaseBlock>();
     private void StartVisuals() 

@@ -23,6 +23,10 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        if (Camera == null) 
+        {
+            Camera = Camera.main;
+        }
 
         pauseUI = FindObjectOfType<UIPauseScreen>();
         cameraData = Camera.GetUniversalAdditionalCameraData();

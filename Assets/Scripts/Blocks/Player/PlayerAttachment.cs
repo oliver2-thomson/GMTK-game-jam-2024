@@ -20,13 +20,19 @@ public partial class PlayerAttachment : MonoBehaviour
     [SerializeField] int middleOffset = 5;
     [SerializeField] public Transform tileParent;
 
+    [Header("Input Settings")]
+    [SerializeField] public KeyCode ToggleBlockActionKey;
+    [SerializeField] public KeyCode UseBlockActionKey;
+
     List<AttachmentPoint> allHighlightObjects = new List<AttachmentPoint>();
 
     private PlayerController playerController;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
@@ -49,9 +55,17 @@ public partial class PlayerAttachment : MonoBehaviour
             BlockList[localPos.x, localPos.y] = block;
             AddAttachmentsPointsFromBlock(localPos, block);
             block.AttachedToItem = true;
-            block.rbCache.DeleteOldRigidbody();
 
-            HideUI();
+            //Add Mass to main character
+            rb.mass += block.rbCache.rb.mass;
+            rb.drag += block.rbCache.rb.drag;
+            rb.angularDrag += block.rbCache.rb.angularDrag;
+
+            block.rbCache.DeleteOldRigidbody();
+            block.player = this;
+
+            //Recalculate Attachment Points
+            ShowAttachmentUI();
 
             //Move player's legs to bottom part of the block "stack"
             playerController.FindBottomMostPoint();
@@ -110,8 +124,17 @@ public partial class PlayerAttachment : MonoBehaviour
                     block.AttachedToItem = false;
                     block.transform.parent = null;
                     detached = true;
+                    block.player = null;
+
+                    rb.mass -= block.rbCache.rb.mass;
+                    rb.drag -= block.rbCache.rb.drag;
+                    rb.angularDrag -= block.rbCache.rb.angularDrag;
+
 
                     BlockList[i, j] = null;
+
+                    //Recalculate Attachment Points
+                    ShowAttachmentUI();
 
                     //Move player's legs to bottom part of the block "stack"
                     playerController.FindBottomMostPoint();
@@ -306,6 +329,41 @@ public partial class PlayerAttachment : MonoBehaviour
         foreach (AttachmentPoint UI in allHighlightObjects)
         {
             UI.gameObject.SetActive(false);
+        }
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(ToggleBlockActionKey)) 
+        {
+            ToggleAllBlocks();
+        }
+        if (Input.GetKeyDown(UseBlockActionKey)) 
+        {
+            UseAllBlocks();
+        }
+    }
+
+    private void ToggleAllBlocks() 
+    {
+        foreach(BaseBlock block in BlockList) 
+        {
+            if (block != null) 
+            {
+                block.OnToggleTile();
+            }
+        }
+    }
+
+    private void UseAllBlocks() 
+    {
+        foreach (BaseBlock block in BlockList)
+        {
+            if (block != null)
+            {
+                block.OnUseTile();
+            }
         }
     }
 }
