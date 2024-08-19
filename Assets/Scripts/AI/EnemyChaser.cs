@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyChaser : Enemy
 {
+
+    [SerializeField] private AudioSource audio;
+    [SerializeField] private float maxVelocitySpeed;
+    [SerializeField] private AnimationCurve velocityPitch;
     public override void OnDetect(PlayerAttachment player)
     {
         IgnoreRationality = true;
@@ -16,6 +20,10 @@ public class EnemyChaser : Enemy
         _player = null;
     }
 
+    private void Update()
+    {
+        audio.pitch = velocityPitch.Evaluate(rb.velocity.magnitude / maxVelocitySpeed);
+    }
     public override void UpdateDetect()
     {
         float offset = _player.transform.position.x - transform.position.x;
