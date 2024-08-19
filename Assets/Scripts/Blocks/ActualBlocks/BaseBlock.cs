@@ -51,6 +51,11 @@ public class BaseBlock : MonoBehaviour
             {
                 currentHealth = MaxHealth;
             }
+            else if (value < 0) 
+            {
+                currentHealth = 0;
+                OnDeath();
+            }
             else 
             {
                 currentHealth = value;
@@ -68,15 +73,17 @@ public class BaseBlock : MonoBehaviour
             //Can technically fail if attached to anything that isn't the player
             player = GetComponentInParent<PlayerAttachment>();
         }
+        currentHealth = MaxHealth;
     }
 
-    public void DamageAtPoint(Vector2 point) 
+    public void DamageAtPoint(Vector2 point, float damage) 
     {
         ImpactPropertiesManager.instance.PlayImpactPropertyAtPoint(material, point);
+        DamageBlock(damage);
     }
-    public void DamageBlock() 
+    public void DamageBlock(float damage) 
     {
-        
+        _Health -= damage;
     }
 
     public List<int> ReturnAllFaceElements()
@@ -93,12 +100,6 @@ public class BaseBlock : MonoBehaviour
 
         return selectedElements;
     }
-
-    public void OnPlacedTile()
-    {
-        //Todo parse oriational data to block
-    }
-
     public virtual void OnUseTile() 
     {
         
@@ -109,6 +110,12 @@ public class BaseBlock : MonoBehaviour
 
     }
 
+    [ContextMenu("Destroy Block")]
+    public virtual void OnDeath() 
+    {
+        player?.ForceDetachBlock(this);
+        GameObject.Destroy(this.gameObject);
+    }
 
     /// <summary>
     /// Use this to Check what face is an attachable point on a block

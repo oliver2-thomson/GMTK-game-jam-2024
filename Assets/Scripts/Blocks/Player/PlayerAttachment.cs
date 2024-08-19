@@ -72,38 +72,60 @@ public partial class PlayerAttachment : MonoBehaviour
         }
     }
 
-    private bool WillRemovingThisLeaveSurroundingBlocksOnTheirOwn(Vector2Int blockRemoved) 
+    private void ActuallyDetachBlock(Vector2Int blockPosition)
     {
-        Vector2Int[] directions = new Vector2Int[4] { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
-        
-        
-        BaseBlock[,] hypotheticalBlockList = new BaseBlock[BlockList.GetLength(0), BlockList.GetLength(1)];
-        //Copy hypothetical
-        for(int x =0; x < BlockList.GetLength(0); x++)
+        BaseBlock block = BlockList[blockPosition.x, blockPosition.y];
+
+        List<AttachmentData> blockFaces = GetAllFacesFromAttachedBlock(new Vector2Int(blockPosition.x, blockPosition.y));
+        foreach (AttachmentData face in blockFaces)
         {
-            for (int y = 0; y < BlockList.GetLength(1); y++)
-            {
-                hypotheticalBlockList[x,y] = BlockList[x, y];
-            }
+            RemoveFaceFromAttachments(face);
         }
 
+        block.rbCache.RecreateRigidbody();
+        block.AttachedToItem = false;
+        block.transform.parent = null;
+        block.player = null;
 
-        hypotheticalBlockList[blockRemoved.x, blockRemoved.y] = null;
+        rb.mass -= block.rbCache.rb.mass;
+        rb.drag -= block.rbCache.rb.drag;
+        rb.angularDrag -= block.rbCache.rb.angularDrag;
 
-        foreach (Vector2Int direction in directions)
+
+        BlockList[blockPosition.x, blockPosition.y] = null;
+
+        //Recalculate Attachment Points
+        ShowAttachmentUI();
+
+        //Move player's legs to bottom part of the block "stack"
+        playerController.FindBottomMostPoint();
+    }
+    
+
+    public void ForceDetachBlock(BaseBlock block)
+    {
+        for (int i = 0; i < BlockList.GetLength(0); i++)
         {
-            if (CheckBlockExists(blockRemoved + direction))
+            for (int j = 0; j < BlockList.GetLength(1); j++)
             {
-                Debug.Log($"Checking Block {blockRemoved + direction}");
-                if (!FindPath(blockRemoved + direction, brain.localGridPosition, hypotheticalBlockList)) 
+                if (BlockList[i, j] == block)
                 {
-                    Debug.Log("INVALID!");
-                    return false;
+                    HashSet<Vector2Int> blocksEffected;
+                    if (WillRemovingThisLeaveSurroundingBlocksOnTheirOwn(new Vector2Int(i, j), out blocksEffected))
+                    {
+                        foreach (Vector2Int blockPosition in blocksEffected)
+                        {
+                            ActuallyDetachBlock(blockPosition);
+                        }
+                    }
+
+                    //Detatch Core
+                    ActuallyDetachBlock(new Vector2Int(i, j));
                 }
             }
         }
-        return true;
     }
+
     public bool TryDetachBlock(BaseBlock block)
     {
         bool detached = false;
@@ -111,33 +133,10 @@ public partial class PlayerAttachment : MonoBehaviour
         {
             for (int j = 0; j < BlockList.GetLength(1); j++)
             {
-                if (BlockList[i, j] == block && WillRemovingThisLeaveSurroundingBlocksOnTheirOwn(new Vector2Int(i,j)))
+                if (BlockList[i, j] == block && WillRemovingThisLeaveSurroundingBlocksOnTheirOwn(new Vector2Int(i, j)))
                 {
-                    
-                    List<AttachmentData> blockFaces = GetAllFacesFromAttachedBlock(new Vector2Int(i, j));
-                    foreach(AttachmentData face in blockFaces) 
-                    {
-                        RemoveFaceFromAttachments(face);
-                    }
-
-                    block.rbCache.RecreateRigidbody();
-                    block.AttachedToItem = false;
-                    block.transform.parent = null;
+                    ActuallyDetachBlock(new Vector2Int(i, j));
                     detached = true;
-                    block.player = null;
-
-                    rb.mass -= block.rbCache.rb.mass;
-                    rb.drag -= block.rbCache.rb.drag;
-                    rb.angularDrag -= block.rbCache.rb.angularDrag;
-
-
-                    BlockList[i, j] = null;
-
-                    //Recalculate Attachment Points
-                    ShowAttachmentUI();
-
-                    //Move player's legs to bottom part of the block "stack"
-                    playerController.FindBottomMostPoint();
                 }
             }
         }
