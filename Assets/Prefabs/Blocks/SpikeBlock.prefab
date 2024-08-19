@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: 4
   MaxHealth: 2.4
-  DragSpeed: 10
+  DragSpeed: 4
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 4492025755895706154}

@@ -63,6 +63,13 @@ public class AudioManager : MonoBehaviour
         mainSource.clip = null;
     }
 
+    public AudioSource GetMusicPlayer()
+    {
+        AudioSource mainSource = audioSources[MaxSoundLimit];
+        return mainSource;
+    }
+
+
     public void PlayMusic(string musicName, float volume)
     {
         AudioSource mainSource = audioSources[MaxSoundLimit];
