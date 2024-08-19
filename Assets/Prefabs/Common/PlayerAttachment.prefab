@@ -317,12 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65095089a95b9e647867c6e3ed57c715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 7
-  MoveAccel: 6
+  MoveSpeed: 6
+  MoveAccel: 5
   MoveMidairAccel: 2
   JumpSpeed: 8
   MaxJumpTime: 0.3
-  StackBasedSpeedBoost: 0.5
+  rb: {fileID: 0}
 --- !u!212 &6188146802559388459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &721391811739166958
 Transform:
   m_ObjectHideFlags: 0
