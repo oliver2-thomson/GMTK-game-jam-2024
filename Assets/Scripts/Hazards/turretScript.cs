@@ -29,9 +29,13 @@ public class turretScript : MonoBehaviour
 
         Direction = targetPos - (Vector2)transform.position;
 
-        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position,Direction,Range);
+        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
+        Debug.Log(rayInfo.collider);
 
-        if(rayInfo)
+
+
+
+        if (rayInfo)
         {
             if(rayInfo.collider.gameObject.tag == "Player")
             {
@@ -55,6 +59,7 @@ public class turretScript : MonoBehaviour
         if(Detected)
         {
             Gun.transform.right = Direction;
+            
         }
 
     }
