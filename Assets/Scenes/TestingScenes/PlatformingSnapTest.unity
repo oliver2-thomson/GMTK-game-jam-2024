@@ -750,6 +750,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5296748890485445185, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
+        type: 3}
+      propertyPath: material
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296748890485445185, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5689143433927221474, guid: 66a90127f8603bf4ab09dcfc1cb154a3,
         type: 3}
       propertyPath: m_Name
@@ -5929,6 +5939,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4229807340766494695, guid: 4f545aa054b1805489c758c1ed217270,
+        type: 3}
+      propertyPath: knockback
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6165,6 +6180,11 @@ PrefabInstance:
       propertyPath: material
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7848126025493558932, guid: 97117d3220e3b1645a0c97ce62fe5751,
+        type: 3}
+      propertyPath: knockback
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6375,6 +6395,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PogoEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6825517907132331380, guid: ac14b7d02a2bed9459d78f698e3b5bf6,
+        type: 3}
+      propertyPath: knockback
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6398,6 +6423,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurtleEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
+        type: 3}
+      propertyPath: knockback
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
+        type: 3}
+      propertyPath: VelocityBased
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292016446416038452, guid: c40c30ce4110a1244ae4b5a641aae942,
         type: 3}
@@ -6828,6 +6868,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910246862803399573, guid: fc6ad46ad83f39846aa2de95e21c951a,
+        type: 3}
+      propertyPath: knockback
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
