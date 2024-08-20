@@ -39,6 +39,7 @@ public class TitleMenu : MonoBehaviour
     private void Update()
     {
         // Main menu navigation
+        /*
         if (currentMenuState != MenuState.Credits)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -77,6 +78,7 @@ public class TitleMenu : MonoBehaviour
                 ToggleVolume(1);
             }
         }
+        */
     }
 
     public void MenuScrollUp()
