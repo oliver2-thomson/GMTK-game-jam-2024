@@ -477,7 +477,7 @@ PrefabInstance:
     - target: {fileID: 4569293980036451689, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8970707194095743613, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
@@ -62817,7 +62817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &523337798
 Transform:
   m_ObjectHideFlags: 0
@@ -63872,7 +63872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &741696253
 Transform:
   m_ObjectHideFlags: 0
@@ -64596,7 +64596,7 @@ PrefabInstance:
     - target: {fileID: 4569293980036451689, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8945921136009039112, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
@@ -65217,7 +65217,7 @@ PrefabInstance:
     - target: {fileID: 5064645494594048503, guid: 28827846123442047879e00290a205ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -65883,7 +65883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1240997873
 Transform:
   m_ObjectHideFlags: 0
@@ -65926,7 +65926,7 @@ PrefabInstance:
     - target: {fileID: 4569293980036451689, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8945921136009039112, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
@@ -67020,7 +67020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1632273367
 Transform:
   m_ObjectHideFlags: 0
@@ -68446,7 +68446,7 @@ PrefabInstance:
     - target: {fileID: 6612176639522356692, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5865989111947697156, guid: 06a08dd2fb0390d4884322c4ec5fbef8, type: 3}
