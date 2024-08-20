@@ -62,9 +62,12 @@ MonoBehaviour:
   blockExplosionValue: 10
   walkOffEdge: 1
   flipTheFlip: 1
-  damage: 2.5
   speed: 850
   walkingLeft: 0
+  VelocityBased: 0
+  velocityScale: 0.1
+  damage: 10
+  knockback: 6
   debugBox: {fileID: 1331035417321795349}
   rb: {fileID: 0}
   localCollider: {fileID: 0}

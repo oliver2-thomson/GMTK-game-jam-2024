@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    private float damage = 10;
+    [SerializeField] private float damage = 10;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        BaseBlock block = other.GetComponent<BaseBlock>();
+        Damageable block = other.GetComponentInParent<Damageable>();
         if (block != null) 
         {
             block.DamageBlock(damage);

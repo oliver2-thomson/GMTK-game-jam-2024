@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fea2efc5cf990b46a06e17c773e0b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: 0
+  material: 1
   MaxHealth: 4
   playerTrigger: {fileID: 2612920837366286972}
   colliderCheckSize: {x: 0.2, y: 0.5}
@@ -357,9 +357,12 @@ MonoBehaviour:
   blockExplosionValue: 10
   walkOffEdge: 1
   flipTheFlip: 0
-  damage: 2.5
   speed: 200
   walkingLeft: 0
+  VelocityBased: 1
+  velocityScale: 0.1
+  damage: 2.5
+  knockback: 8
   debugBox: {fileID: 3537943815571560394}
   rb: {fileID: 0}
   localCollider: {fileID: 0}
@@ -378,7 +381,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.96
-  m_LinearDrag: 0.76
+  m_LinearDrag: 0.25
   m_AngularDrag: 0.15
   m_GravityScale: 1
   m_Material: {fileID: 0}

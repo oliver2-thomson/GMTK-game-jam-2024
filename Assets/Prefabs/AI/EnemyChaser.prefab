@@ -452,9 +452,12 @@ MonoBehaviour:
   blockExplosionValue: 10
   walkOffEdge: 0
   flipTheFlip: 0
-  damage: 4
   speed: 500
   walkingLeft: 0
+  VelocityBased: 1
+  velocityScale: 0.1
+  damage: 4
+  knockback: 20
   debugBox: {fileID: 5202103950211206155}
   rb: {fileID: 0}
   localCollider: {fileID: 0}
@@ -486,6 +489,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  directionTransform: {fileID: 0}
 --- !u!1 &8573170486898412645
 GameObject:
   m_ObjectHideFlags: 0

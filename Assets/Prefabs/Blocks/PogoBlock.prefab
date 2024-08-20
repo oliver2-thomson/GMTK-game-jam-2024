@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c9496771a7b19438170d59b07096df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upwardForce: 3200
+  upwardForce: 6400
   hitForce: 500
   resetTimer: 3
   boxTrigger: {fileID: 6917671423657154238}
@@ -213,17 +213,17 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.069
+      value: 3.983985
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.762
+      value: -1.2513194
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1957567
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -233,17 +233,17 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -364,10 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ab34e7a0d42c04680a2524a55ab2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: 10
-  MaxHealth: 1.2
-  DragSpeed: 3.2
   material: 0
+  MaxHealth: 1.2
+  enumType: 10
+  DragSpeed: 3.2
   AttachedToItem: 0
   rbCache: {fileID: 8084217729110388051}
   DragSource: {fileID: 0}

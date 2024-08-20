@@ -32,6 +32,7 @@ public class Enemy : Damageable
     [HideInInspector] public Collider2D localCollider;
     private SpriteRenderer sprite;
 
+    [HideInInspector] public System.Action _OnDeath;
     [HideInInspector] public bool IgnoreRationality = false;
 
     [HideInInspector] public PlayerAttachment _player;
@@ -151,7 +152,8 @@ public class Enemy : Damageable
 
     public override void OnDeath()
     {
-       foreach(GameObject block in BlocksDropped) 
+        _OnDeath?.Invoke();
+       foreach (GameObject block in BlocksDropped) 
         {
             GameObject clone = GameObject.Instantiate(block, transform.position, transform.rotation, null);
             Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
