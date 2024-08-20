@@ -48,6 +48,10 @@ public class Zone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.isTrigger) 
+        {
+            return;
+        }
         if (collision.GetComponentInParent<PlayerAttachment>()) 
         {
             OnZoneEnter();
@@ -57,6 +61,10 @@ public class Zone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.isTrigger)
+        {
+            return;
+        }
         if (collision.GetComponentInParent<PlayerAttachment>())
         {
             OnZoneExit();
