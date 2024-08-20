@@ -83,7 +83,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        blockNum = playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>().Length;
+        blockNum = 0;
+        foreach (BaseBlock block in playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>())
+        {
+            if (block.GetComponent<Rigidbody2D>() != null)
+            {
+                blockNum += block.GetComponent<Rigidbody2D>().mass;
+            }
+        }
         speedBoostForce = (blockNum * StackSpeedBoost);
     }
 
@@ -105,7 +112,8 @@ public class PlayerController : MonoBehaviour
         float finalForce = speedDifference * accelRate;
 
         // Apply the horizontal force
-        rb.AddForce(new Vector2(finalForce * (blockNum + speedBoostForce), 0), ForceMode2D.Force);
+        rb.velocity += new Vector2(0, finalForce);
+        //rb.AddForce(new Vector2(finalForce * (blockNum > 1 ? speedBoostForce * 2: 1), 0), ForceMode2D.Force);
     }
 
     private void VerticalMovement()
