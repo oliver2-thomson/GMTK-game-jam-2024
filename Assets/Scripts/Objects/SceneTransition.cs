@@ -9,11 +9,12 @@ public class SceneTransition : ZoneItem
     [Space(10)]
     public int NewSceneIndex;
     public Animator FadeAnimator;
+    [SerializeField] private float secondsToTransfer;
 
     private IEnumerator StartTransition()
     {
         FadeAnimator.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(FadeAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        yield return new WaitForSeconds(secondsToTransfer);
         SceneManager.LoadScene(NewSceneIndex);
         StopAllCoroutines();
     }
