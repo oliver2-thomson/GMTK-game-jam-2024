@@ -1760,22 +1760,22 @@ PrefabInstance:
     - target: {fileID: 1840993169984447603, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 17.977669
+      value: 19.967886
       objectReference: {fileID: 0}
     - target: {fileID: 1840993169984447603, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 12.543554
+      value: 13.136865
       objectReference: {fileID: 0}
     - target: {fileID: 1840993169984447603, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.0098
+      value: -8.0272
       objectReference: {fileID: 0}
     - target: {fileID: 1840993169984447603, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9912
+      value: 2.288
       objectReference: {fileID: 0}
     - target: {fileID: 1840993169984447603, guid: 8caba7ecbeeb4df43aed9bfc7712c7e8,
         type: 3}
@@ -93875,7 +93875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &825710041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94009,7 +94009,6 @@ MonoBehaviour:
   gizmoColor: {r: 0.9528302, g: 0.73997813, b: 0.6082532, a: 1}
   LinkedZones:
   - {fileID: 1473912523}
-  - {fileID: 1292966815}
   zoneItems:
   - {fileID: 1569950239}
   OnPrimaryEnter:
@@ -97174,7 +97173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.78, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1292966818
 Transform:
