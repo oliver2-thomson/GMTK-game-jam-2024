@@ -7,7 +7,7 @@ public class Cannon : MonoBehaviour
     public GameObject target = null;
     public GameObject projectilePrefab;
     public float projectilePower;
-    private List<GameObject> projectiles = new List<GameObject>();
+    [SerializeField] private float damage;
     public float fireRate = 2;
     private float cooldownProgress = 0;
 
@@ -42,10 +42,10 @@ public class Cannon : MonoBehaviour
         if (target != null)
         {
             Vector3 displacement = target.transform.position - transform.position;
-            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
             Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
             rb.AddForce(displacement.normalized * projectilePower);
-            projectiles.Add(newProjectile);
+            newProjectile.GimmeDamage(damage, this.transform.GetComponentInParent<Rigidbody2D>().transform);
         }
     }
 
