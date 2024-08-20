@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2362453299215147448}
   - component: {fileID: 3011658401247046834}
   m_Layer: 0
-  m_Name: Cannon-Ball
+  m_Name: JacobsBadCannonBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
