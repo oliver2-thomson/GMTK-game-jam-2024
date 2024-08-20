@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
     private void VerticalMovement()
     {
         // Jumping logic
+        Debug.Log(blockNum);
         if (!isGrounded)
         {
             if (jumpInput && currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)

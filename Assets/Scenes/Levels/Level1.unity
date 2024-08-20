@@ -97833,19 +97833,7 @@ MonoBehaviour:
   - {fileID: 1530159813}
   OnPrimaryEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1530159813}
-        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: OnZoneEnter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnSecondaryEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -98126,10 +98114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0d1c0982cbccf429b85c4a6730f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoneTrigger: -1
+  ZoneTrigger: 1
   NewSceneIndex: 3
   FadeAnimator: {fileID: 2054900749}
-  secondsToTransfer: 0.68
 --- !u!1001 &1558417233
 PrefabInstance:
   m_ObjectHideFlags: 0
