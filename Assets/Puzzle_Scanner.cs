@@ -5,6 +5,7 @@ using UnityEngine;
 public class Puzzle_Scanner : MonoBehaviour
 {
     [SerializeField] private TriggerEvents2DToggle[] patterns;
+    [Space]
     [SerializeField] private UnityEngine.Events.UnityEvent OnComplete;
     [SerializeField] private UnityEngine.Events.UnityEvent OnCompleteOneShot;
 
