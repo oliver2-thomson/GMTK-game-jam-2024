@@ -725,6 +725,11 @@ PrefabInstance:
       objectReference: {fileID: 6744144778852712496}
     - target: {fileID: 4214801362440117590, guid: 0c3b094927ed7fa44b4cb3bf1d82619b,
         type: 3}
+      propertyPath: grabbedBlockLayerNumber
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214801362440117590, guid: 0c3b094927ed7fa44b4cb3bf1d82619b,
+        type: 3}
       propertyPath: attachmentPointLayer.m_Bits
       value: 32
       objectReference: {fileID: 0}

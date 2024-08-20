@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private ParticleSystem explosion;
     private float damage = 0;
-    private Transform owner;
+    [HideInInspector] public Transform owner;
     public void GimmeDamage(float PutDamageHere, Transform ownerOrigin) 
     {
         damage = PutDamageHere;
