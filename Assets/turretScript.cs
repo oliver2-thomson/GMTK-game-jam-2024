@@ -15,6 +15,14 @@ public class turretScript : MonoBehaviour
     public GameObject Alarm;
     public GameObject Gun;
 
+    public GameObject CannonBall;
+    public float FireRate;
+    public float TimeTofire = 0;
+
+    public Transform TargetPoint;
+
+    public float Force;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +39,7 @@ public class turretScript : MonoBehaviour
         // Perform the raycast
         RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
         Debug.Log(rayInfo.collider);
-        if(rayInfo.collider != null && rayInfo.collider.GetComponentInParent<PlayerController>() != null)
+        if (rayInfo.collider != null && rayInfo.collider.GetComponentInParent<PlayerController>() != null)
         {
             if (!Detected)
             {
@@ -48,16 +56,33 @@ public class turretScript : MonoBehaviour
             }
         }
 
-        if(Detected)
+        if (Detected)
         {
             Gun.transform.right = Direction;
+            if (Time.time > TimeTofire)
+            {
+                TimeTofire = Time.time + 1 / FireRate;
+                shoot();
+            }
+        }
+
+        void shoot()
+        {
+            GameObject CannonBallIns = Instantiate(CannonBall, TargetPoint.position, Quaternion.identity);
+            CannonBallIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+        }
+
+
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, Range);
+            Gizmos.DrawRay(transform.position, Direction);
         }
     }
 
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position,Range);
-        Gizmos.DrawRay(transform.position, Direction);
-    }
+
 }
+
+
+
