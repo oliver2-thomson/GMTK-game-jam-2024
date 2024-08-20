@@ -18,7 +18,7 @@ public class RigidBodyCache : MonoBehaviour
     PhysicsMaterial2D sharedMaterial;
     bool useAutoMass;
 
-    float mass;
+    public float mass;
     float drag;
     float angularDrag;
     float gravityScale;
