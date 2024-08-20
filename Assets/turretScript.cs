@@ -18,6 +18,7 @@ public class turretScript : MonoBehaviour
     public GameObject CannonBall;
     public float FireRate;
     public float TimeTofire = 0;
+    [SerializeField] private float damage = 1;
 
     public Transform TargetPoint;
 
@@ -26,7 +27,7 @@ public class turretScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Target = FindObjectOfType<PlayerAttachment>().transform;
     }
 
 
@@ -38,7 +39,6 @@ public class turretScript : MonoBehaviour
 
         // Perform the raycast
         RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
-        Debug.Log(rayInfo.collider);
         if (rayInfo.collider != null && rayInfo.collider.GetComponentInParent<PlayerController>() != null)
         {
             if (!Detected)
@@ -65,19 +65,18 @@ public class turretScript : MonoBehaviour
                 shoot();
             }
         }
+    }
+    void shoot()
+    {
+        GameObject CannonBallIns = Instantiate(CannonBall, TargetPoint.position, Quaternion.identity);
+        CannonBallIns.GetComponent<Rigidbody2D>().AddForce(Direction.normalized * Force);
+        CannonBallIns.GetComponent<Projectile>().GimmeDamage(damage, this.transform);
+    }
 
-        void shoot()
-        {
-            GameObject CannonBallIns = Instantiate(CannonBall, TargetPoint.position, Quaternion.identity);
-            CannonBallIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
-        }
-
-
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawWireSphere(transform.position, Range);
-            Gizmos.DrawRay(transform.position, Direction);
-        }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, Range);
+        Gizmos.DrawRay(transform.position, Direction);
     }
 
 
