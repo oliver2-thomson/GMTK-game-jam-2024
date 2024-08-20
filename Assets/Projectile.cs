@@ -14,7 +14,11 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.IsChildOf(owner)) 
+        if (owner == null)
+        {
+            Debug.LogError("GIMME DAMAGE HASNT BEEN CALLED ");
+        }
+        if (collision.isTrigger || collision.transform.IsChildOf(owner)) 
         {
             return;
         }
@@ -22,11 +26,6 @@ public class Projectile : MonoBehaviour
         Damageable damagable = collision.GetComponentInParent<Damageable>();
         if (damagable != null) 
         {
-            //Damage
-            if (damage == 0) 
-            {
-                Debug.Log("DAMAGE IS 0!");
-            }
             damagable.DamageAtPoint(collision.ClosestPoint(transform.position), damage);
         }
 
