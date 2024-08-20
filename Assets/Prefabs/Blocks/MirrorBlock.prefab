@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1859498607188495627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041256885555460139}
+  - component: {fileID: 8101278611332290320}
+  - component: {fileID: 889169199917530194}
+  m_Layer: 8
+  m_Name: Reflection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2041256885555460139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859498607188495627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9053266300236357309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8101278611332290320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859498607188495627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff68bea751925ee4db2068799efdf642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &889169199917530194
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859498607188495627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 1.25}
+  m_EdgeRadius: 0
 --- !u!1001 &9071812999491547198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,7 +202,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2041256885555460139}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -131,6 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694edd802ee349447a411686a8bfc556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &9053266300236357309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+    type: 3}
+  m_PrefabInstance: {fileID: 9071812999491547198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9205340619336852123 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
@@ -149,10 +249,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ede3624d9058b49b0d9562f28b3e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: -1
-  MaxHealth: 0.4
-  DragSpeed: 26.65
   material: 4
+  MaxHealth: 0.4
+  enumType: -1
+  DragSpeed: 26.65
   AttachedToItem: 0
   rbCache: {fileID: 4176847914196099812}
   DragSource: {fileID: 0}

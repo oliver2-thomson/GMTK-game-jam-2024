@@ -129,7 +129,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -205,17 +205,17 @@ PrefabInstance:
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.185
+      value: -1.270015
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.195
+      value: -1.8183196
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1957567
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
@@ -225,17 +225,17 @@ PrefabInstance:
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1815502037841464150, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}
@@ -286,6 +286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656374970979794300, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
+        type: 3}
+      propertyPath: damage
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 7656374970979794300, guid: 06a08dd2fb0390d4884322c4ec5fbef8,
         type: 3}

@@ -17,11 +17,15 @@ public class Enemy : Damageable
     [SerializeField] private float blockExplosionValue = 10;
     [SerializeField] bool walkOffEdge = true;
     [SerializeField] bool flipTheFlip = false;
-
-    [SerializeField] float damage = 20;
     [SerializeField] public float speed = 5;
-
     [SerializeField] public bool walkingLeft;
+
+    [Space]
+    [SerializeField] private bool VelocityBased = true;
+    [SerializeField] private float velocityScale = 0.1f;
+    [SerializeField] float damage = 20;
+    [SerializeField] private float knockback = 2f;
+
     [SerializeField] private Transform debugBox;
 
     [HideInInspector] public Rigidbody2D rb;
@@ -119,6 +123,13 @@ public class Enemy : Damageable
 
         if (rayHit.collider != null)
         {
+            //Connected Block to player edge case
+            BaseBlock block = rayHit.collider.GetComponent<BaseBlock>();
+            if (block != null && block.AttachedToItem) 
+            {
+                return;
+            }
+
             walkingLeft = !walkingLeft;
         }
     }
@@ -151,5 +162,28 @@ public class Enemy : Damageable
         }
 
         GameObject.Destroy(this.gameObject);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        BaseBlock block = collision.collider.GetComponent<BaseBlock>();
+        if (block != null)
+        {
+            float velocityDamage;
+
+            //Calculate Damage
+            if (VelocityBased)
+            {
+                velocityDamage = damage * velocityScale * GetComponentInParent<Rigidbody2D>().velocity.magnitude;
+            }
+            else
+                velocityDamage = damage;
+
+            //Knock back THIS IS JANK PLZ FIX
+            Rigidbody2D blockRb = block.GetComponentInParent<Rigidbody2D>();
+            blockRb.velocity += (rb.velocity.normalized * knockback);
+
+            block.DamageAtPoint(collision.GetContact(0).point, velocityDamage);
+        }
     }
 }

@@ -8,6 +8,8 @@ public class EnemyChaser : Enemy
     [SerializeField] private AudioSource audio;
     [SerializeField] private float maxVelocitySpeed;
     [SerializeField] private AnimationCurve velocityPitch;
+
+    [SerializeField] private Transform directionTransform;
     public override void OnDetect(PlayerAttachment player)
     {
         IgnoreRationality = true;
@@ -22,7 +24,18 @@ public class EnemyChaser : Enemy
 
     private void Update()
     {
-        audio.pitch = velocityPitch.Evaluate(rb.velocity.magnitude / maxVelocitySpeed);
+        if (audio != null)
+        {
+            audio.pitch = velocityPitch.Evaluate(rb.velocity.magnitude / maxVelocitySpeed);
+        }
+
+        if (directionTransform != null)
+        {
+            if (walkingLeft) 
+                directionTransform.transform.rotation = Quaternion.Euler(0, 0, 0);
+            else
+                directionTransform.transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
     }
     public override void UpdateDetect()
     {
