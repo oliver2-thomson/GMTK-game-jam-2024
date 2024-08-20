@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     private PlayerAttachment Player;
     private PlayerController PlayerController;
+    private PlayerMouse PlayersMouse;
 
     // Private variables
     private UIPauseScreen pauseUI;
@@ -33,6 +34,7 @@ public class GameController : MonoBehaviour
 
         Player = FindObjectOfType<PlayerAttachment>();
         PlayerController = Player.GetComponent<PlayerController>();
+        PlayersMouse = FindObjectOfType<PlayerMouse>();
 
         pauseUI = FindObjectOfType<UIPauseScreen>();
         cameraData = Camera.GetUniversalAdditionalCameraData();
@@ -58,11 +60,13 @@ public class GameController : MonoBehaviour
                 cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
                 //cameraData.cameraStack[0].enabled = false;
 
+                PlayersMouse.DropObject();
                 Player.HideUI();
             }
         }
         
         // Pausing
+        /*
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (!IsPaused)
@@ -78,5 +82,6 @@ public class GameController : MonoBehaviour
                 pauseUI.UnpauseAnim();
             }
         }
+        */
     }
 }

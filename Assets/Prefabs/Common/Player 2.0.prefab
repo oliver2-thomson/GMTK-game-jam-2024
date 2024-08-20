@@ -471,11 +471,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: 3
-  MaxHealth: 8
+  MaxHealth: 5
   enumType: -1
   DragSpeed: 0
   AttachedToItem: 1
   rbCache: {fileID: 0}
+  DeathClip: {fileID: 0}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}
