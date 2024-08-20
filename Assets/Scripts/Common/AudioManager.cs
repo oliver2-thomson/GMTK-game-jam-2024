@@ -19,6 +19,11 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (AudioManager.instance != null) 
+        {
+            this.enabled = false;
+            return;
+        }
         DontDestroyOnLoad(this);
         instance = this;
 
@@ -62,6 +67,13 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(mainSource.clip.length);
         mainSource.clip = null;
     }
+
+    public AudioSource GetMusicPlayer()
+    {
+        AudioSource mainSource = audioSources[MaxSoundLimit];
+        return mainSource;
+    }
+
 
     public void PlayMusic(string musicName, float volume)
     {

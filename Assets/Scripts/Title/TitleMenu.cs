@@ -39,6 +39,7 @@ public class TitleMenu : MonoBehaviour
     private void Update()
     {
         // Main menu navigation
+        /*
         if (currentMenuState != MenuState.Credits)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -77,6 +78,7 @@ public class TitleMenu : MonoBehaviour
                 ToggleVolume(1);
             }
         }
+        */
     }
 
     public void MenuScrollUp()
@@ -143,7 +145,13 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
-    public void SelectButton()
+    public void ManualSwitchMenuOption(int newOption)
+    {
+        selectedMenuOption = newOption;
+        OptionsHighlight.position = new Vector2(OptionsHighlight.position.x, OptionsButtons[selectedMenuOption].transform.position.y);
+    }
+
+        public void SelectButton()
     {
         switch (currentMenuState)
         {

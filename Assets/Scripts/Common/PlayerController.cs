@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     // Public variables
     [Header("General Player Settings")]
+    public bool InputEnabled;
 
     [Space(10)]
     [Header("Physics Settings")]
@@ -19,6 +20,15 @@ public class PlayerController : MonoBehaviour
 
     public float JumpSpeed;
     public float MaxJumpTime;
+    public float StackSpeedBoost;
+
+    public float Horizonantal 
+    {
+        get 
+        {
+            return (leftInput ? -1 : rightInput ? 1 : 0);
+        }
+    }
 
     // Private variables
     private bool leftInput;
@@ -27,9 +37,11 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private float currentJumpTimer;
+    private float blockNum;
+    private float speedBoostForce;
 
     // Component references
-    private Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     private BoxCollider2D col;
     private CompositeCollider2D compCol;
     private PlayerAttachment playerAttacher;
@@ -50,23 +62,29 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Processing inputs
-        leftInput = Input.GetKey(KeyCode.A);
-        rightInput = Input.GetKey(KeyCode.D);
-        if (Input.GetKey(KeyCode.W))
+        if (InputEnabled)
         {
-            if (currentJumpTimer == 0)
+            leftInput = Input.GetKey(KeyCode.A);
+            rightInput = Input.GetKey(KeyCode.D);
+            if (Input.GetKey(KeyCode.W))
             {
-                jumpInput = true;
+                if (currentJumpTimer == 0)
+                {
+                    jumpInput = true;
+                }
+                if (!isGrounded)
+                {
+                    currentJumpTimer += Time.deltaTime;
+                }
             }
-            if (!isGrounded)
+            else
             {
-                currentJumpTimer += Time.deltaTime;
+                jumpInput = false;
             }
         }
-        else
-        {
-            jumpInput = false;
-        }
+
+        blockNum = playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>().Length;
+        speedBoostForce = (blockNum * StackSpeedBoost);
     }
 
     private void FixedUpdate()
@@ -81,13 +99,13 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        float targetSpeed = MoveSpeed * (leftInput ? -1 : rightInput ? 1 : 0);
+        float targetSpeed = MoveSpeed * Horizonantal;
         float speedDifference = targetSpeed - rb.velocity.x;
         float accelRate = isGrounded ? MoveAccel : MoveMidairAccel;
-        float force = speedDifference * accelRate;
+        float finalForce = speedDifference * accelRate;
 
         // Apply the horizontal force
-        rb.AddForce(new Vector2(force, 0), ForceMode2D.Force);
+        rb.AddForce(new Vector2(finalForce * (blockNum + speedBoostForce), 0), ForceMode2D.Force);
     }
 
     private void VerticalMovement()
@@ -97,7 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             if (jumpInput && currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
             {
-                rb.AddForce(new Vector2(0, JumpSpeed - rb.velocity.y), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, (JumpSpeed * (blockNum > 1 ? speedBoostForce : 1)) - rb.velocity.y), ForceMode2D.Impulse);
             }
             else
             {
@@ -109,7 +127,7 @@ public class PlayerController : MonoBehaviour
             if (jumpInput)
             {
                 isGrounded = false;
-                rb.AddForce(new Vector2(0, JumpSpeed), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, JumpSpeed * (blockNum > 1 ? speedBoostForce : 1)), ForceMode2D.Impulse);
             }
         }
     }
@@ -145,21 +163,49 @@ public class PlayerController : MonoBehaviour
 
                 foreach (RaycastHit2D hit in groundCheck)
                 {
-                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    if (hit.collider.gameObject != block.gameObject)
                     {
-                        if (hit.normal == Vector2.up)
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                         {
-                            if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                            if (hit.normal == Vector2.up)
                             {
-                                isGrounded = true;
-                                currentJumpTimer = 0;
-                                colCheckFinished = true;
-                                break;
+                                if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                                {
+                                    isGrounded = true;
+                                    currentJumpTimer = 0;
+                                    colCheckFinished = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    isGrounded = false;
+                                    break;
+                                }
                             }
-                            else
+                        }
+                        else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform"))
+                        {
+                            BaseBlock testBlock = hit.collider.gameObject.GetComponent<BaseBlock>();
+                            if (testBlock != null)
                             {
-                                isGrounded = false;
-                                break;
+                                if (!testBlock.AttachedToItem)
+                                {
+                                    if (hit.normal == Vector2.up)
+                                    {
+                                        if (Mathf.Floor(hit.distance * 10) / 10 <= 0)
+                                        {
+                                            isGrounded = true;
+                                            currentJumpTimer = 0;
+                                            colCheckFinished = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isGrounded = false;
+                                            break;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -248,6 +294,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        Debug.Log(lowestBlocks.Count);
 
         // Then, find the middle point of those for the new x position
         float totalLowestX = 0f;
@@ -257,8 +304,10 @@ public class PlayerController : MonoBehaviour
         }
         float middleX = totalLowestX / lowestBlocks.Count();
 
+        /*
         // Move all of the blocks by how much the player would be moving
         Vector2 playerNewPos = new Vector2(middleX, lowestY - (lowestBlocks[0].size.y / 2) - (col.size.y / 2));
         playerAttacher.tileParent.localPosition += (Vector3)(rb.position - playerNewPos);
+        */
     }
 }

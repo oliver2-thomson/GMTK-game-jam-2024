@@ -276,6 +276,26 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Size.x
@@ -306,6 +326,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1775061845
       objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -360,13 +390,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103533d1efd0ffa459ff1e2aeb25b5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: 0
+  enumType: 4
   MaxHealth: 0
+  DragSpeed: 8
   material: 0
   AttachedToItem: 0
   rbCache: {fileID: 1923573733977914345}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
+  player: {fileID: 0}
   windTrigger: {fileID: 2254581647391373895}
   backForce: 520
   playerForce: 120

@@ -7,9 +7,10 @@ public class Spike : MonoBehaviour
     private float damage = 10;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        BaseBlock block = other.GetComponent<BaseBlock>();
+        if (block != null) 
         {
-            Debug.Log(other.GetComponent<BaseBlock>());
+            block.DamageBlock(damage);
         }
     }
 }

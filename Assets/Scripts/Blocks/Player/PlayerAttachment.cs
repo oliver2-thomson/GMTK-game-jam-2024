@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class PlayerAttachment : MonoBehaviour
 {
 
-    BaseBlock[,] BlockList = new BaseBlock[10,10];
+    BaseBlock[,] BlockList = new BaseBlock[20,20];
     List<AttachmentData> attachmentData = new List<AttachmentData>();
     //bool[,] blockAttachmentPoints = new bool[10, 10];
 
@@ -63,6 +63,7 @@ public partial class PlayerAttachment : MonoBehaviour
 
             block.rbCache.DeleteOldRigidbody();
             block.player = this;
+            block.OnAttachBlock();
 
             //Recalculate Attachment Points
             ShowAttachmentUI();
@@ -236,11 +237,11 @@ public partial class PlayerAttachment : MonoBehaviour
 
     bool CheckBlockExists(Vector2Int pos) 
     {
-        if (pos.x < 0 || pos.x > BlockList.GetLength(0)) 
+        if (pos.x < 0 || pos.x > BlockList.GetLength(0) - 1) 
         {
             return true;
         }
-        else if (pos.y < 0 || pos.y > BlockList.GetLength(0)) 
+        else if (pos.y < 0 || pos.y > BlockList.GetLength(0) - 1) 
         {
             return true;
         }
@@ -267,11 +268,11 @@ public partial class PlayerAttachment : MonoBehaviour
     private void StartBackend() 
     {
         //Set Brain Spot
-        BlockList[5, 5] = brain;
-        brain.localGridPosition = new Vector2Int(5, 5);
+        BlockList[10, 10] = brain;
+        brain.localGridPosition = new Vector2Int(10, 10);
 
         //Set all sides for default attachments
-        AddAttachmentsPointsFromBlock(new Vector2Int(5, 5), brain);
+        AddAttachmentsPointsFromBlock(new Vector2Int(10, 10), brain);
     }
 
     HashSet<Vector2Int> GetAllActiveAttachmentPoints()

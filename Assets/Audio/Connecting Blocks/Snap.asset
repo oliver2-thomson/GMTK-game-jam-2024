@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb73bf496152e3242a34e7d55e539118, type: 3}
+  m_Name: Snap
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: c72689bb01bc7af46a363ba9d9282dda, type: 3}
+  - {fileID: 8300000, guid: 4ffb9aeff01bb244694e3f47a0f407cf, type: 3}
+  - {fileID: 8300000, guid: c9b49aaf39e710b46a89ce218af10fd3, type: 3}
+  - {fileID: 8300000, guid: 599c59b851222bf44b3f8a303dc5316e, type: 3}
+  - {fileID: 8300000, guid: 83fff473d316aba4cba34f0a82ac81f7, type: 3}
+  - {fileID: 8300000, guid: 187eb3ba780fbc44cad51093cdb46f6d, type: 3}
+  - {fileID: 8300000, guid: c0e0d6b8d80362d4997934ecd1a50809, type: 3}
+  - {fileID: 8300000, guid: 52ed19830d3a12446bcd415f0481b895, type: 3}
+  - {fileID: 8300000, guid: afe7decd66916ee45bef468ed4e945b3, type: 3}
+  - {fileID: 8300000, guid: 9765f1ba5771e35429e89a1d065621a7, type: 3}
+  - {fileID: 8300000, guid: 11cc99d0d2558bb409477ab57d0a2fed, type: 3}
+  - {fileID: 8300000, guid: 4f4d89f3c93e29b4f9916a53f2ecc0eb, type: 3}
+  - {fileID: 8300000, guid: 4a45bc8f069199943a75ed6782b0e0c1, type: 3}
