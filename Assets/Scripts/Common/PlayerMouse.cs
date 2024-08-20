@@ -10,10 +10,12 @@ public class PlayerMouse : MonoBehaviour
     public PlayerAttachment Player;
     [SerializeField] private LayerMask attachmentPointLayer;
     [SerializeField] private LineRenderer lineRender;
+    [SerializeField] private int grabbedBlockLayerNumber = 12;
 
 
     private Camera Camera;
     private BaseBlock ObjectGrabbed;
+    private int oldObjectGrabbedLayer;
     private bool clickInput;
     private bool canRotate = true;
 
@@ -86,6 +88,7 @@ public class PlayerMouse : MonoBehaviour
                                Player.AttachBlock(ObjectGrabbed.CurrentAttPoint.attachPoint, ObjectGrabbed);
                     }
                     ObjectGrabbed.DragSource = null;
+                    ObjectGrabbed.gameObject.layer = oldObjectGrabbedLayer;
                     ObjectGrabbed = null;
                 }
             }
@@ -123,6 +126,8 @@ public class PlayerMouse : MonoBehaviour
                         }
 
                         ObjectGrabbed = blockComp;
+                        oldObjectGrabbedLayer = ObjectGrabbed.gameObject.layer;
+                        ObjectGrabbed.gameObject.layer = grabbedBlockLayerNumber;
                         blockComp.DragSource = transform;
                     }
                 }
