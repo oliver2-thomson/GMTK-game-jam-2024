@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 169585781671383717, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Name
-      value: BasicBlock (1) Variant
+      value: WoodenBlock
       objectReference: {fileID: 0}
     - target: {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -72,6 +72,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxHealth
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -93,6 +98,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1775061845
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

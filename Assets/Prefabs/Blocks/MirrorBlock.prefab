@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: MaxHealth
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 5903994709690841305, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_Sprite
@@ -93,6 +98,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108920913723654990, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1775061845
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5516224469016222755, guid: 7d19e1f5e9d082c4f86b2f3933a6362f, type: 3}
@@ -136,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enumType: -1
   MaxHealth: 0.4
+  DragSpeed: 0
   material: 4
   AttachedToItem: 0
   rbCache: {fileID: 4176847914196099812}

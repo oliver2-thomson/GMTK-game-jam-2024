@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         float finalForce = speedDifference * accelRate;
 
         // Apply the horizontal force
-        rb.AddForce(new Vector2(finalForce * blockNum, 0), ForceMode2D.Force);
+        rb.AddForce(new Vector2(finalForce * (blockNum + speedBoostForce), 0), ForceMode2D.Force);
     }
 
     private void VerticalMovement()
