@@ -7,15 +7,23 @@ public class ZoneSpawner : ZoneItem
     [Space]
     [Header("Drag enemy from Prefab/AI to Below!")]
     [SerializeField] Enemy enemy;
+    [Space]
+    [SerializeField] UnityEngine.Events.UnityEvent onDeath;
 
     bool hasSpawned = false;
     public override void OnZoneEnter()
     {
         if (!hasSpawned) 
         {
-            GameObject.Instantiate(enemy, transform.position, transform.rotation, null);
+            Enemy spawned_enemy = GameObject.Instantiate(enemy, transform.position, transform.rotation, null).GetComponent<Enemy>();
+            spawned_enemy._OnDeath += OnDeath;
             hasSpawned = true;
         }
+    }
+
+    public void OnDeath() 
+    {
+        onDeath?.Invoke();
     }
 
     public void OnDrawGizmos()

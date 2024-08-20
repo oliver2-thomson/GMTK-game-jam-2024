@@ -25,7 +25,7 @@ public class Sign : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.GetComponentInParent<PlayerController>())
         {
             fadeIn = true;
             fadeOut = false;
@@ -34,7 +34,7 @@ public class Sign : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.GetComponentInParent<PlayerController>())
         {
             fadeOut = true;
             fadeIn = false;
