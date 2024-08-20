@@ -204,17 +204,17 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.914
+      value: -4.999015
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.272
+      value: -2.7413197
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1957567
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -390,18 +390,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103533d1efd0ffa459ff1e2aeb25b5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enumType: 4
-  MaxHealth: 0
-  DragSpeed: 8
   material: 0
+  MaxHealth: 1.97
+  enumType: 4
+  DragSpeed: 8
   AttachedToItem: 0
   rbCache: {fileID: 1923573733977914345}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}
   windTrigger: {fileID: 2254581647391373895}
-  backForce: 520
-  playerForce: 120
+  backForce: 1040
+  playerForce: 814.5
   toggleTile: 1
 --- !u!95 &8426857931225125113
 Animator:

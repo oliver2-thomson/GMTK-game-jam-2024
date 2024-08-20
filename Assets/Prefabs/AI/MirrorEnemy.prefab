@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73883035410650435}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,7 +89,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -185,9 +185,12 @@ MonoBehaviour:
   blockExplosionValue: 10
   walkOffEdge: 1
   flipTheFlip: 1
-  damage: 2.5
   speed: 850
   walkingLeft: 0
+  VelocityBased: 1
+  velocityScale: 0.1
+  damage: 2.5
+  knockback: 10
   debugBox: {fileID: 3705909343096157182}
   rb: {fileID: 0}
   localCollider: {fileID: 0}

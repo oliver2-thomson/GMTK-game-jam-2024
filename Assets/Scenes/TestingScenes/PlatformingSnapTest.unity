@@ -5655,11 +5655,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
-    - target: {fileID: 8945921136009039112, guid: 44bf618474f9aad458c7b7f2d242fdd1,
-        type: 3}
-      propertyPath: Force
-      value: 320
-      objectReference: {fileID: 0}
     - target: {fileID: 8970707194095743613, guid: 44bf618474f9aad458c7b7f2d242fdd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5723,11 +5718,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2027418535}
     m_Modifications:
-    - target: {fileID: 1300260342379067294, guid: 3532112add8472c49bc1f9e1d328b57f,
-        type: 3}
-      propertyPath: upwardForce
-      value: 6400
-      objectReference: {fileID: 0}
     - target: {fileID: 3775254017507922186, guid: 3532112add8472c49bc1f9e1d328b57f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6084,51 +6074,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MirrorEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2644630646132392467, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229807340766494695, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: knockback
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858234682384061620, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5004813004723969557, guid: 4f545aa054b1805489c758c1ed217270,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6177,11 +6122,6 @@ PrefabInstance:
     - target: {fileID: 5004813004723969557, guid: 4f545aa054b1805489c758c1ed217270,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7475496288483598475, guid: 4f545aa054b1805489c758c1ed217270,
-        type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6265,11 +6205,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2005866126}
     m_Modifications:
-    - target: {fileID: 1531090660126719807, guid: 97117d3220e3b1645a0c97ce62fe5751,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 4053632888721218684, guid: 97117d3220e3b1645a0c97ce62fe5751,
         type: 3}
       propertyPath: m_Name
@@ -6324,16 +6259,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848126025493558932, guid: 97117d3220e3b1645a0c97ce62fe5751,
-        type: 3}
-      propertyPath: material
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848126025493558932, guid: 97117d3220e3b1645a0c97ce62fe5751,
-        type: 3}
-      propertyPath: knockback
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6545,11 +6470,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PogoEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 6825517907132331380, guid: ac14b7d02a2bed9459d78f698e3b5bf6,
-        type: 3}
-      propertyPath: knockback
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6573,21 +6493,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurtleEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
-        type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
-        type: 3}
-      propertyPath: knockback
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2177778626515292214, guid: c40c30ce4110a1244ae4b5a641aae942,
-        type: 3}
-      propertyPath: VelocityBased
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292016446416038452, guid: c40c30ce4110a1244ae4b5a641aae942,
         type: 3}
@@ -6731,11 +6636,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2027418535}
     m_Modifications:
-    - target: {fileID: 4728456397056305165, guid: 061a6b6ee239c894686abd73cbb7a072,
-        type: 3}
-      propertyPath: playerForce
-      value: 250
-      objectReference: {fileID: 0}
     - target: {fileID: 6699453642182179734, guid: 061a6b6ee239c894686abd73cbb7a072,
         type: 3}
       propertyPath: m_Name
@@ -7019,11 +6919,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6910246862803399573, guid: fc6ad46ad83f39846aa2de95e21c951a,
-        type: 3}
-      propertyPath: knockback
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7120,3 +7015,5 @@ SceneRoots:
   - {fileID: 1137758570}
   - {fileID: 2005866126}
   - {fileID: 2121513580}
+  - {fileID: 261614287}
+  - {fileID: 494123135}
