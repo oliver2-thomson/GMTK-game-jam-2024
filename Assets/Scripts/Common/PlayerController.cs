@@ -84,12 +84,9 @@ public class PlayerController : MonoBehaviour
         }
 
         blockNum = 0;
-        foreach (BaseBlock block in playerAttacher.tileParent.GetComponentsInChildren<BaseBlock>())
+        foreach (RigidBodyCache block in playerAttacher.tileParent.GetComponentsInChildren<RigidBodyCache>())
         {
-            if (block.GetComponent<Rigidbody2D>() != null)
-            {
-                blockNum += block.GetComponent<Rigidbody2D>().mass;
-            }
+            blockNum += block.mass;
         }
         speedBoostForce = (blockNum * StackSpeedBoost);
     }
@@ -112,22 +109,23 @@ public class PlayerController : MonoBehaviour
         float finalForce = speedDifference * accelRate;
 
         // Apply the horizontal force
-        rb.velocity += new Vector2(0, finalForce);
+        rb.velocity += new Vector2(finalForce * Time.deltaTime, 0);
         //rb.AddForce(new Vector2(finalForce * (blockNum > 1 ? speedBoostForce * 2: 1), 0), ForceMode2D.Force);
     }
 
     private void VerticalMovement()
     {
         // Jumping logic
+        Debug.Log(blockNum);
         if (!isGrounded)
         {
             if (jumpInput && currentJumpTimer != 0 && currentJumpTimer < MaxJumpTime)
             {
-                rb.AddForce(new Vector2(0, (JumpSpeed * (blockNum > 1 ? speedBoostForce : 1)) - rb.velocity.y), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, (JumpSpeed + (blockNum > 1 ? blockNum : 1)) - rb.velocity.y), ForceMode2D.Impulse);
             }
             else
             {
-                rb.AddForce(new Vector2(0, -rb.gravityScale), ForceMode2D.Force);
+                //rb.AddForce(new Vector2(0, -rb.gravityScale), ForceMode2D.Force);
             }
         }
         else
@@ -135,7 +133,7 @@ public class PlayerController : MonoBehaviour
             if (jumpInput)
             {
                 isGrounded = false;
-                rb.AddForce(new Vector2(0, JumpSpeed * (blockNum > 1 ? speedBoostForce : 1)), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, JumpSpeed + (blockNum > 1 ? blockNum : 1)), ForceMode2D.Impulse);
             }
         }
     }
