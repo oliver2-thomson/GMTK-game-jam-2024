@@ -7,6 +7,7 @@ public class ZoneSpawner : ZoneItem
     [Space]
     [Header("Drag enemy from Prefab/AI to Below!")]
     [SerializeField] Enemy enemy;
+    [SerializeField] bool isWalkingLeft = false;
     [Space]
     [SerializeField] UnityEngine.Events.UnityEvent onDeath;
 
@@ -17,6 +18,7 @@ public class ZoneSpawner : ZoneItem
         {
             Enemy spawned_enemy = GameObject.Instantiate(enemy, transform.position, transform.rotation, null).GetComponent<Enemy>();
             spawned_enemy._OnDeath += OnDeath;
+            spawned_enemy.walkingLeft = isWalkingLeft;
             hasSpawned = true;
         }
     }

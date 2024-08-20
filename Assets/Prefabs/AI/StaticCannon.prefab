@@ -58,7 +58,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.203, y: 0.074, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 0.8978319, y: 0.8978319, z: 0.8978319}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8970707194095743613}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8970707194095743613}
   - component: {fileID: 8945921136009039112}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: StaticCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   TimeTofire: 0
   damage: 0.4
   TargetPoint: {fileID: 1480479609038488940}
-  Force: 80
+  Force: 320
 --- !u!1 &4734801581023686512
 GameObject:
   m_ObjectHideFlags: 0

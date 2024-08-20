@@ -12,11 +12,13 @@ public class PropellerBlock : BaseBlock
     [SerializeField] private bool toggleTile = false;
 
     private Animator propelleranimator;
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         windTrigger.OnTriggerStay += OnWindTunnelEntered;
         propelleranimator = GetComponent<Animator>();
         propelleranimator.speed = toggleTile ? 1 : 0;
+        windTrigger.gameObject.SetActive(toggleTile);
     }
 
     public override void OnToggleTile()
@@ -34,6 +36,7 @@ public class PropellerBlock : BaseBlock
         }
     }
 
+
     private void BlowPlayer() 
     {
         Rigidbody2D rb = gameObject.GetComponentInParent<Rigidbody2D>();
@@ -42,7 +45,7 @@ public class PropellerBlock : BaseBlock
 
     private void OnWindTunnelEntered(Collider2D collision) 
     {
-        if (toggleTile) 
+        if (toggleTile && DragSource == null) 
         {
             Rigidbody2D rb = collision.GetComponentInParent<Rigidbody2D>();
             if (rb != null) 
