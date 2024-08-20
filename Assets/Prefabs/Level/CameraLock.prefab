@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3671e694d2ce5244a54dd511ab718e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoneTrigger: 1
+  ZoneTrigger: -1
   CameraLockX: 1
   CameraLockY: 1
