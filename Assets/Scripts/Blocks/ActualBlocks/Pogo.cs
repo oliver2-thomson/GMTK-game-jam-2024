@@ -73,10 +73,10 @@ public class Pogo : MonoBehaviour
 
         if (hitSuccessful) 
         {
-            GetComponentInParent<Rigidbody2D>().AddForce(upwardForce * -transform.up);
+            GetComponentInParent<Rigidbody2D>().velocity += (Vector2)(upwardForce * -transform.up);
 
             animator.Play("Pogo");
-            AudioSource.PlayClipAtPoint(SFX.GetRandomClip(), transform.position, AudioManager.instance.SoundVolume);
+            AudioSource.PlayClipAtPoint(SFX.GetRandomClip(), transform.position);
 
             onCoolDown = true;
             StartCoroutine(PogoCooldown());

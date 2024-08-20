@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c9496771a7b19438170d59b07096df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upwardForce: 6400
+  upwardForce: 20
   hitForce: 500
   resetTimer: 3
   boxTrigger: {fileID: 6917671423657154238}
