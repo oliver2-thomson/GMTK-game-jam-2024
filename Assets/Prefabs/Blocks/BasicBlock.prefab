@@ -54,6 +54,7 @@ MonoBehaviour:
   DragSpeed: 10
   AttachedToItem: 0
   rbCache: {fileID: 4905168587830563546}
+  DeathClip: {fileID: 11400000, guid: 772b75ddd951e5f4297109e8360d66ee, type: 2}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}

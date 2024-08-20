@@ -13,6 +13,7 @@ public partial class PlayerAttachment : MonoBehaviour
     [SerializeField] private GameObject highlight_prefab;
     [SerializeField] private Transform highlightParent;
     [SerializeField] private BrainBlock brain;
+    [SerializeField] private AudioClips connectSFX;
 
     [Header("Tile Positional Data")]
     [SerializeField] Vector2 tileOffset = new Vector2(1,1);
@@ -64,6 +65,8 @@ public partial class PlayerAttachment : MonoBehaviour
             block.rbCache.DeleteOldRigidbody();
             block.player = this;
             block.OnAttachBlock();
+
+            AudioSource.PlayClipAtPoint(connectSFX.GetRandomClip(), block.transform.position);
 
             //Recalculate Attachment Points
             ShowAttachmentUI();
@@ -120,6 +123,7 @@ public partial class PlayerAttachment : MonoBehaviour
                         }
                     }
 
+                    AudioSource.PlayClipAtPoint(connectSFX.GetRandomClip(), block.transform.position);
                     //Detatch Core
                     ActuallyDetachBlock(new Vector2Int(i, j));
                 }
@@ -136,6 +140,7 @@ public partial class PlayerAttachment : MonoBehaviour
             {
                 if (BlockList[i, j] == block && WillRemovingThisLeaveSurroundingBlocksOnTheirOwn(new Vector2Int(i, j)))
                 {
+                    AudioSource.PlayClipAtPoint(connectSFX.GetRandomClip(), block.transform.position);
                     ActuallyDetachBlock(new Vector2Int(i, j));
                     detached = true;
                 }

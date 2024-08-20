@@ -24,6 +24,7 @@ public class BaseBlock : Damageable
     [Space(10)]
     [Header("REQUIRED")]
     public RigidBodyCache rbCache;
+    [SerializeField] private AudioClips DeathClip;
 
     [HideInInspector] public Transform DragSource;
     [HideInInspector] public AttachmentPoint CurrentAttPoint;
@@ -73,6 +74,7 @@ public class BaseBlock : Damageable
     [ContextMenu("Destroy Block")]
     public override void OnDeath() 
     {
+        AudioSource.PlayClipAtPoint(DeathClip.GetRandomClip(), transform.position);
         player?.ForceDetachBlock(this);
         GameObject.Destroy(this.gameObject);
     }

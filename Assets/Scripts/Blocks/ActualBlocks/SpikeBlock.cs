@@ -8,6 +8,7 @@ public class SpikeBlock : BaseBlock
     [Header("Spike Data")]
     [SerializeField] private Vector2 offsetTowardsCenter;
     [SerializeField] private float damage = 1.5f;
+    [SerializeField] private AudioClips DamageSFX;
 
     [Space]
     [SerializeField] private bool VelocityBased = true;
@@ -32,6 +33,8 @@ public class SpikeBlock : BaseBlock
             }
             else
                 velocityDamage = damage;
+
+            AudioSource.PlayClipAtPoint(DamageSFX.GetRandomClip(), transform.position);
 
             block.DamageAtPoint(pos, velocityDamage);
         }

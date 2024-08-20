@@ -6,6 +6,10 @@ public class PropellerBlock : BaseBlock
 {
     [Space]
     [Header("Propeller Data")]
+    [SerializeField] private AudioSource audioSrc;
+    [SerializeField] private AudioClips blowSFX;
+    [Range(0,1)]
+    [SerializeField] private float blowSFXVolume = 0.5f;
     [SerializeField] private TriggerEvents2D windTrigger;
     [SerializeField] private float backForce;
     [SerializeField] private float playerForce;
@@ -52,6 +56,9 @@ public class PropellerBlock : BaseBlock
             {
                 if (this.transform.IsChildOf(rb.transform))
                     return;
+
+                if (!audioSrc.isPlaying)
+                    audioSrc.PlayOneShot(blowSFX.GetRandomClip(), blowSFXVolume);
 
                 rb.AddForce(backForce * Time.deltaTime * transform.up);
             }

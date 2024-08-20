@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff68bea751925ee4db2068799efdf642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFX: {fileID: 11400000, guid: 53eedee4802f8cf4c9054e7955a3ff31, type: 2}
 --- !u!61 &889169199917530194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -101,17 +102,17 @@ PrefabInstance:
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: -6.3850155
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.28
+      value: 0.26668072
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1957567
       objectReference: {fileID: 0}
     - target: {fileID: 19743243607256707, guid: 7d19e1f5e9d082c4f86b2f3933a6362f,
         type: 3}
@@ -250,11 +251,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: 4
-  MaxHealth: 0.4
+  MaxHealth: 0.27
   enumType: -1
-  DragSpeed: 26.65
+  DragSpeed: 15.4
   AttachedToItem: 0
   rbCache: {fileID: 4176847914196099812}
+  DeathClip: {fileID: 11400000, guid: 772b75ddd951e5f4297109e8360d66ee, type: 2}
   DragSource: {fileID: 0}
   CurrentAttPoint: {fileID: 0}
   player: {fileID: 0}

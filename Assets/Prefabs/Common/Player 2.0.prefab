@@ -272,6 +272,7 @@ MonoBehaviour:
     type: 3}
   highlightParent: {fileID: 647666186587806626}
   brain: {fileID: 5296748890485445185}
+  connectSFX: {fileID: 11400000, guid: 80af010450f0e774aa458b12ac7c761e, type: 2}
   tileOffset: {x: 1, y: 1}
   middleOffset: 10
   tileParent: {fileID: 3403060740656222872}
@@ -469,8 +470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2de871ba2f64647b097681130a72b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: 0
-  MaxHealth: 0
+  material: 3
+  MaxHealth: 8
   enumType: -1
   DragSpeed: 0
   AttachedToItem: 1

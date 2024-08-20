@@ -7,6 +7,7 @@ public class Enemy : Damageable
 
     [Header("REQUIRED")]
 
+    [SerializeField] private AudioClips DeathSFX;
     [SerializeField] private TriggerEvents2D playerTrigger;
     [SerializeField] private Vector2 colliderCheckSize;
     [SerializeField] public LayerMask wallChecks;
@@ -153,6 +154,9 @@ public class Enemy : Damageable
     public override void OnDeath()
     {
         _OnDeath?.Invoke();
+
+        AudioSource.PlayClipAtPoint(DeathSFX.GetRandomClip(), transform.position);
+
        foreach (GameObject block in BlocksDropped) 
         {
             GameObject clone = GameObject.Instantiate(block, transform.position, transform.rotation, null);

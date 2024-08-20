@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb73bf496152e3242a34e7d55e539118, type: 3}
+  m_Name: DestroyBlock
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: d569af4e00e0a3441914934dbfb77809, type: 3}
+  - {fileID: 8300000, guid: eb771fa5787e4c2439d4613cb796bf7c, type: 3}
+  - {fileID: 8300000, guid: 65e4bf1412f06c14fba9f9813f66286b, type: 3}
+  - {fileID: 8300000, guid: d85137336679acc4b8df5a682db0e08e, type: 3}

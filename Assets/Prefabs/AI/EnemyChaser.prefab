@@ -441,6 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: 2
   MaxHealth: 2.1
+  DeathSFX: {fileID: 11400000, guid: 772b75ddd951e5f4297109e8360d66ee, type: 2}
   playerTrigger: {fileID: 5400031946126000345}
   colliderCheckSize: {x: 0.2, y: 0.2}
   wallChecks:
