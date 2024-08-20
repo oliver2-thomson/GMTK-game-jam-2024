@@ -15,7 +15,7 @@ public class SpikeBlock : BaseBlock
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        BaseBlock block = collision.collider.GetComponentInParent<BaseBlock>();
+        Damageable block = collision.collider.GetComponentInParent<Damageable>();
         if (block != null && !CheckObjectIsntAttached(collision.transform))
         {
             //Calculate damage position
@@ -41,7 +41,7 @@ public class SpikeBlock : BaseBlock
     // UNUSED!
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        BaseBlock block = collision.GetComponentInParent<BaseBlock>();
+        Damageable block = collision.GetComponentInParent<Damageable>();
         if (block != null && CheckObjectIsntAttached(collision.transform))
         {
             //Calculate damage position

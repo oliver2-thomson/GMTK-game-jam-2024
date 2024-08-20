@@ -21,12 +21,20 @@ public class AudioToggle : MonoBehaviour
     {
         if (IsMusicToggle)
         {
-            AudioManager.instance.MusicVolume = Mathf.Clamp(AudioManager.instance.MusicVolume + (dir * 0.1f), 0f, 1f);
+            AudioManager.instance.MusicVolume += dir * 0.1f;
+            if (AudioManager.instance.MusicVolume > 1)
+            {
+                AudioManager.instance.MusicVolume = 0;
+            }
             textComp.text = (Mathf.Round(AudioManager.instance.MusicVolume * 100)).ToString() + "%";
         }
         if (IsSoundToggle)
         {
-            AudioManager.instance.SoundVolume = Mathf.Clamp(AudioManager.instance.SoundVolume + (dir * 0.1f), 0f, 1f);
+            AudioManager.instance.SoundVolume += dir * 0.1f;
+            if (AudioManager.instance.SoundVolume > 1)
+            {
+                AudioManager.instance.SoundVolume = 0;
+            }
             textComp.text = (Mathf.Round(AudioManager.instance.SoundVolume * 100)).ToString() + "%";
         }
     }

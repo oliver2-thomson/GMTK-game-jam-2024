@@ -14,7 +14,9 @@ public class GameController : MonoBehaviour
     public bool IsPaused;
     [Space(10)]
     public Camera Camera;
-    public PlayerAttachment Player;
+
+    private PlayerAttachment Player;
+    private PlayerController PlayerController;
 
     // Private variables
     private UIPauseScreen pauseUI;
@@ -22,11 +24,15 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Physics2D.queriesHitTriggers = false;
         instance = this;
         if (Camera == null) 
         {
             Camera = Camera.main;
         }
+
+        Player = FindObjectOfType<PlayerAttachment>();
+        PlayerController = Player.GetComponent<PlayerController>();
 
         pauseUI = FindObjectOfType<UIPauseScreen>();
         cameraData = Camera.GetUniversalAdditionalCameraData();
@@ -34,23 +40,26 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        // Switching between editing and playing modes
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (PlayerController.InputEnabled)
         {
-            IsEditingBlocks = true;
-            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeIn");
-            //cameraData.cameraStack[0].enabled = true;
+            // Switching between editing and playing modes
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                IsEditingBlocks = true;
+                cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeIn");
+                //cameraData.cameraStack[0].enabled = true;
 
-            Player.ShowAttachmentUI();
-        }
+                Player.ShowAttachmentUI();
+            }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            IsEditingBlocks = false;
-            cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
-            //cameraData.cameraStack[0].enabled = false;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                IsEditingBlocks = false;
+                cameraData.cameraStack[0].GetComponentInChildren<Animator>().SetTrigger("FadeOut");
+                //cameraData.cameraStack[0].enabled = false;
 
-            Player.HideUI();
+                Player.HideUI();
+            }
         }
         
         // Pausing
