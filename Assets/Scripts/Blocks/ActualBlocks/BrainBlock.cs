@@ -6,8 +6,16 @@ public class BrainBlock : BaseBlock
 {
     public Vector2Int localGridPosition;
 
+    private UIGameOver gameOver;
+
+    public override void Awake()
+    {
+        base.Awake();
+        gameOver = FindObjectOfType<UIGameOver>();
+    }
+
     public override void OnDeath()
     {
-        Debug.Log("OH NO PLAYER DIED!");
+        gameOver.OnGameOver();
     }
 }
