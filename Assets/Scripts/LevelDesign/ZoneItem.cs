@@ -11,7 +11,6 @@ public abstract class ZoneItem : MonoBehaviour
         Secondary
     }
 
-    [EnumFlagsAttributes]
     public ZoneType ZoneTrigger;
 
 

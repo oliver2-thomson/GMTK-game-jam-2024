@@ -14,7 +14,6 @@ public class BaseBlock : Damageable
         Left = 3
     }
 
-    [EnumFlagsAttributes]
     [Tooltip("Select what faces are attachable from this")]
 
     [SerializeField] private FaceType enumType;
